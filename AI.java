@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -20,6 +21,7 @@ import java.util.Random;
 public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     private Colour colour;
     private GameOverStatus gameOverStatus;
+    private int opponent;
     
     public AI() {
         reset();
@@ -39,6 +41,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     
     @Override
     public void noteOpponentsId(int id) throws PlayerException {
+        opponent = id;
         //dunno if necessary
     }
     
@@ -62,5 +65,9 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     
     public abstract void noteGameOver(GameOverStatus whatHappened) throws PlayerException {
         gameOverStatus = whatHappened;
+    }
+    
+    public static boolean isLegal(Location l) {
+        
     }
 }
