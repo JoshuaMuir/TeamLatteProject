@@ -23,6 +23,8 @@ public class Referee {
     {
     //communicates with the bead to the peg
     //isnt this the bead or player class job?
+        //no the referee will be the one keeping track of the board and placing beads. remember that ref only places a bead
+        //if the move is legal
     //checkmove
     }
     public void displayBoard()
