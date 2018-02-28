@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -14,7 +14,7 @@ import ca.unbc.cpsc.latte.rules;//not sure if we are making this as a class or n
  *
  * @author ryans
  */
-public class Referee {
+public class Referee { //referee will be to call the AI constructor as well so you'll need a getAI()
     public void reset()
     {
     //restarts the game or starts it
