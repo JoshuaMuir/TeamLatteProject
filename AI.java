@@ -54,8 +54,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     public Location requestMoveLocation() throws PlayerException {
         Location move;
         return move;
-        /*pick a peg at random and check if it's full? possibly with a 
-        static checkPeg method?*/
+        /*pick a peg at random and check if it's full? or send random 3D/2D location*/
     }
     
     @Override
@@ -65,9 +64,5 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     
     public abstract void noteGameOver(GameOverStatus whatHappened) throws PlayerException {
         gameOverStatus = whatHappened;
-    }
-    
-    public static boolean isLegal(Location l) {
-        
     }
 }
