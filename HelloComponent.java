@@ -14,13 +14,16 @@ import javafx.scene.shape.Circle;
 
 class HelloComponent extends JComponent {
 
+    public static Graphics2D g2;
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         System.out.println("im in yr method");
-if(NotGraphics.peg01==2)System.out.println("what is going on man");
-else;
-        Graphics2D g2 = (Graphics2D) g;
+        if (NotGraphics.peg01 == 2) {
+            System.out.println("what is going on man");
+        } else;
+        g2 = (Graphics2D) g;
         Graphics2D g3 = (Graphics2D) g;
         Rectangle rect1 = new Rectangle(20, 400, 800, 500);
         Rectangle rect2 = new Rectangle(200, 300, 800, 500);
@@ -30,15 +33,7 @@ else;
         Rectangle rect6 = new Rectangle(800, 300, 10, 100);
         Rectangle rect7 = new Rectangle(400, 300, 10, 100);
         Rectangle[] bricks = new Rectangle[50];
-        /*bricks[0]=new Rectangle(400,300,10,100);
-bricks[1]=new Rectangle(350,300,10,100);
-bricks[2]=new Rectangle(300,300,100,100);
-bricks[3]=new Rectangle(250,300,10,100);
-bricks[4]=new Rectangle(200,300,10,100);
-bricks[5]=new Rectangle(100,300,10,100);
-bricks[6]=new Rectangle(50,300,10,100);
 
-         */
         int counter = 0;
         int xcoord = 190;
         int ycoord = 290;
@@ -129,10 +124,10 @@ bricks[6]=new Rectangle(50,300,10,100);
             //ctr[j]=new Area(guy[j]);  
             //ctr[j].add(new Area(guy[j]));
             j++;
-           // System.out.println("irks");
+            // System.out.println("irks");
             if (j < 75 && j > 2) {
                 ctr[j].add(new Area(guy[j - 1]));
-             //   System.out.print("orks");
+                //   System.out.print("orks");
             } else;
         }
 
@@ -169,75 +164,127 @@ bricks[6]=new Rectangle(50,300,10,100);
             tricycle[r] = new Ellipse2D.Double(xcoord, ycoord, dia1, dia1);
             ycoord -= 30;
             if (r == 3) {
-                xcoord=248;
-                ycoord =410;
+                xcoord = 248;
+                ycoord = 410;
             } else;
-            if(r==7){
-            xcoord=310;
-            ycoord=460;
+            if (r == 7) {
+                xcoord = 310;
+                ycoord = 460;
+            } else;
+            if (r == 11) {
+                xcoord = 380;
+                ycoord = 510;
+            } else;
+            if (r == 15) {
+                xcoord = 277;
+                ycoord = 340;
             }
         }
         g2.setColor(Color.black);
 //g2.draw(circle);
         g2.setColor(Color.white);
 //g2.fill(circle);
-        if(NotGraphics.peg01==2)
+       
+        if (NotGraphics.peg01 >= 2) {
             System.out.println("what is going on");
-        else;
-        g2.setColor(Color.black);
+        } else;
+       g2.setColor(Color.black);
 
         for (int q = 0; q < 16; ++q) {
 
             g3.fill(bricks[q]);
-        } 
-        
-        
-        g2.setColor(Color.white);
-        if (NotGraphics.peg00 >=1||NotGraphics.peg00==2) {
+        } if(NotGraphics.whomTurn%2==0)
+            g2.setColor(Color.white);
+        else g2.setColor(Color.black);
+
+//        g2.setColor(Color.white);
+        if (NotGraphics.peg00 >= 1 || NotGraphics.peg00 == 2) {
             System.out.println("now we are here");
             g2.fill(tricycle[0]);
         } else;
         if (NotGraphics.peg00 >= 2) {
             g2.fill(tricycle[1]);
         } else;
-        
-        if(NotGraphics.peg00>=3){
+
+        if (NotGraphics.peg00 >= 3) {
             g2.fill(tricycle[2]);
         } else;
-        
-        if(NotGraphics.peg00>=4){
-        
+
+        if (NotGraphics.peg00 >= 4) {
+            
+            int x=NotGraphics.whomTurn;
+            if(x%2==0){g2.setColor(Color.black);
+            
+            }
+            g2.fill(tricycle[3]);
+        } else;
+        System.out.println("we are before the if");
+        System.out.println("we are also before the if");
+
+        if (NotGraphics.peg01 >= 2) {
+            System.out.println("We are in things");
             g2.fill(tricycle[5]);
         } else;
-         System.out.println("we are before the if");   
-        System.out.println("we are also before the if");
-         
-         if(NotGraphics.peg01 >= 2){
-        System.out.println("We are in things");
-            g2.fill(tricycle[5]);}
-        
-        else;
-        
-        if (NotGraphics.peg01 ==1||NotGraphics.peg01==2) {
+
+        if (NotGraphics.peg01 >= 1) {
             g2.fill(tricycle[4]);
 
-        }else; 
-        
-        System.out.println("we are before the if");   
-        if(NotGraphics.peg01 >= 2){
-        System.out.println("We are in things");
-            g2.fill(tricycle[5]);}
-        
-        else;
-        
-        
-        if(NotGraphics.peg02>=1)
+        } else;
+        if (NotGraphics.peg01 >= 3) {
+            g2.fill(tricycle[6]);
+        } else;
+        if (NotGraphics.peg01 >= 4) {
+            g2.fill(tricycle[7]);
+        } else;
+        System.out.println("we are before the if");
+        if (NotGraphics.peg01 >= 2) {
+            System.out.println("We are in things");
+            g2.fill(tricycle[5]);
+        } else;
+
+        if (NotGraphics.peg02 >= 1) {
             g2.fill(tricycle[8]);
-        else;
-        if(NotGraphics.peg02>=2){
+        } else;
+        if (NotGraphics.peg02 >= 2) {
             g2.fill(tricycle[9]);
-        System.out.println("what is this");}
-        else;
+            System.out.println("what is this");
+        } else;
+        if (NotGraphics.peg02 >= 3) {
+            g2.fill(tricycle[10]);
+
+        } else;
+        if (NotGraphics.peg02 >= 4) {
+            g2.fill(tricycle[11]);
+        } else;
+
+        if (NotGraphics.peg03 >= 1) {
+            g2.fill(tricycle[12]);
+
+        } else;
+        if (NotGraphics.peg03 >= 2) {
+            g2.fill(tricycle[13]);
+        } else;
+        if (NotGraphics.peg03 >= 3) {
+            g2.fill(tricycle[14]);
+
+        } else;
+        if (NotGraphics.peg03 >= 4) {
+            g2.fill(tricycle[15]);
+        }
+        if (NotGraphics.peg10 >= 1) {
+            g2.fill(tricycle[16]);
+
+        } else;
+        if (NotGraphics.peg10 >= 2) {
+            g2.fill(tricycle[17]);
+        } else;
+        if (NotGraphics.peg10 >= 3) {
+            g2.fill(tricycle[18]);
+
+        } else;
+        if (NotGraphics.peg10 >= 4) {
+            g2.fill(tricycle[19]);
+        }
 //switch(NotGraphics.boot){
 //    case 1: g2.fill(tricycle[0]);
 //    case 2: g2.fill(tricycle[1]);
@@ -248,4 +295,3 @@ bricks[6]=new Rectangle(50,300,10,100);
         g2.setColor(Color.black);
     }
 }
-
