@@ -16,6 +16,6 @@ public interface Location {
     public static final int MAX_COLUMN = 3;
     public static final int MIN_COLUMN = 0;
     
-    public abstract int getrow();
+    public abstract int getRow();
     public abstract int getColumn();
 }
