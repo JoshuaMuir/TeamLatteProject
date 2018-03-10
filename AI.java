@@ -31,6 +31,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     @Override
     public void reset() throws PlayerException {
         startGameAs(Referee.assignColour());
+        //not sure if AI calls the referee method or if the referee calls AI.startGameAs directly
         gameOverStatus = null;
         opponent = 0;
         turnCount = 1;
@@ -44,7 +45,6 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     @Override
     public void noteOpponentsId(int id) throws PlayerException {
         opponent = id;
-        //dunno if necessary
     }
     
     @Override
@@ -62,12 +62,13 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
         int height;
         
         boolean sameColor;
+        //for checking vertical lines of 3
         
         Bead b1;
         Bead b2;
         Bead b3;
         
-        if(isFirstFour()) {
+        if(isFirstFour()) { //try to get a corner peg
             if(Board.getPeg[0].getLength() == 0) {
                  move = new Loc3d(3, 0, 0);
             }
@@ -83,18 +84,20 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
         }
         else {
             for(int i = 0; i < Board.getPeg[].length; i++) {
-                if(Board.getPeg[i].getLength() == 3) {
+                if(Board.getPeg[i].getLength() == 3) { //check if there are vertical lines of 3
                     b1 = Board.getPeg[i].beadlist[0];
                     b2 = Board.getPeg[i].beadlist[1];
                     b3 = Board.getPeg[i].beadlist[2];
                     
                     if(b1.getColour() == b2.getColour() && b2.getColour() == b3.getColour()) {
+                        //check if 3 beads in a line are same colour
                         row = Board.getPeg[i].getRow();
                         column = Board.getPeg[i].getColumn();
                         height = Board.getPeg[i].getLength();
                     
                         move = new Loc3d(row, column, height);
                         i = Board.getPeg[].length;
+                        //exit loop
                     }
                 }
                 else
@@ -117,21 +120,26 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     
     private boolean isFirstFour() {
         return (turnCount < 9);
+        //first four AI turns, 8 turns total
     }
     
     private Loc3d randomPlay() {
+        //method chooses a peg location at random
         Loc3d move;
         Random random = new Random();
         boolean isLegal = false;
+        
         while(!isLegal) {
             int randomIndex = random.nextInt(4);
             
-            if(Board.getPeg[randomIndex].getLength() < 4) {
+            if(Board.getPeg[randomIndex].getLength() < 4) { //if peg isn't full
                 int row = Board.getPeg[randomIndex].getRow();
                 int col = Board.getPeg[randomIndex].getColumn();
                 int height = Board.getPeg[randomIndex].getLength();
+                
                 move = new Loc3d(row, col, height);
                 isLegal = true;
+                //exit loop
             }
         }
         return move;
