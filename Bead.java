@@ -8,7 +8,7 @@ package ca.unbc.cpsc.latte;
 //48 type 2
 //singles occur if a bead is at the same location on two straights
 //doubles occur if a bead is at the same location on three straights
-public class Bead implements Colour {
+public class Bead{
 
     private final Colour c;
     private final Loc3d l;
@@ -40,14 +40,8 @@ public class Bead implements Colour {
     public Colour getColour() {
         return c;
     }
-
-    @Override
-    public boolean isBlack() {//mention
-
-    }
-
-    @Override
-    public boolean isWhite() {
-
+    
+    public boolean isBlack(){
+        return (c.isBlack());
     }
 }
