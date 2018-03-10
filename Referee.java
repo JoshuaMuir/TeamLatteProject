@@ -5,33 +5,35 @@
  */
 package ca.unbc.cpsc.latte;
 import ca.unbc.cpsc.latte.Loc3d;
-import ca.unbc.cpsc.latte.Loc2d; //Jordan: Don't need this, this was just a test class
 import ca.unbc.cpsc.latte.Bead;
-import ca.unbc.cpsc.latte.player;
+import ca.unbc.cpsc.latte.Player;
 import ca.unbc.cpsc.latte.AI;
-import ca.unbc.cpsc.latte.rules;//not sure if we are making this as a class or not.
 /**
  *
  * @author ryans
  */
-public class Referee { //referee will be to call the AI constructor as well so you'll need a getAI()
-    public void reset()
-    {
-    //restarts the game or starts it
-    }
+public class Referee {
+  
+    private Color pc; 
+    private Board board;
+    private Bead b;
+    
+//    public void reset()
+//    {
+//    //resets the game if the user wants to
+//    }
     public void placeBead()
     {
     //communicates with the bead to the peg
     //isnt this the bead or player class job?
-        //no the referee will be the one keeping track of the board and placing beads. remember that ref only places a bead
-        //if the move is legal
-    //checkmove
+    //checkmoves then places the bead
+        //uses the array above
     }
     public void displayBoard()
     {
     //displays the board
     }
-    public void checkMove(Location l)
+    public boolean checkMove(Location l)
     {
     //communicates with loc3d and loc2d
     //maybe the rules to check
@@ -39,18 +41,45 @@ public class Referee { //referee will be to call the AI constructor as well so y
     }
     public void checkWin(Location l)
     {
-    //communicates with loc3d and loc2d
+    //checks the rows
     //maybe the rules to check
     //notify the players who won
+
     }
-    public void assignColour()//or tracks color
+    private Colour colourAt(Bead b){
+//     return colourAt(b.getRow(),b.getColumn(),b.getHeight());
+    
+//    Peg p = board.getPeg(b.getRow(),b.getColumn());
+    Colour c = b.getColour();
+    return c;
+    }
+    
+    
+    public boolean hasaWin(Loc3d [] aLine)
     {
-    //who the black or white is
+     //checks the stuff   
+     int index =0;
+     switch (index)
+     {
+         case 0:
+             if ((colourAt(aLine[1],aLine[2],aLine[3]))==pc){return true;}
+             else if ((colourAt(aLine[4],aLine[8],aLine[12])==pc)){return true;}
+             else if (colourAt(aLine[5],aLine[10],aLine[15])==pc){return true;}
+             else {return false;}
+     }
+           
+     return false;   
     }
-    public void rules()
+
+    public Color assignColour(Color c)//or tracks color
     {
-    //if we are not doing a rules class
-   
+        pc = c;
+      return c;
     }
-   
+    //not sure yet
+    public void startGame()
+    {
+    AI ai = new AI();
+    Player p = new Player();
+    }
 }
