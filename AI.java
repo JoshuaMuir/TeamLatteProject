@@ -49,7 +49,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     
     @Override
     public void opponentPlays(Location ell) throws PlayerException {
-        //do i even do anything for this
+        turnCount++;
     }
     
     @Override
@@ -61,34 +61,47 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
         int column;
         int height;
         
+        boolean sameColor;
+        
+        Bead b1;
+        Bead b2;
+        Bead b3;
+        
         if(isFirstFour()) {
             if(Board.getPeg[0].getLength() == 0) {
-                move = new Loc3d(3, 0, 0);
+                 move = new Loc3d(3, 0, 0);
             }
             else if(Board.getPeg[3].getLength() == 0) {
-                move = new Loc3d(3, 3, 0);
+                 move = new Loc3d(3, 3, 0);
             }
             else if(Board.getPeg[12].getLength() == 0) {
-                move = new Loc3d(0, 0, 0);
+                 move = new Loc3d(0, 0, 0);
             }
             else if(Board.getPeg[15].getLength() == 0) {
-                move = new Loc3d(0, 3, 0);
+                 move = new Loc3d(0, 3, 0);
             }
         }
         else {
             for(int i = 0; i < Board.getPeg[].length; i++) {
                 if(Board.getPeg[i].getLength() == 3) {
-                    row = Board.getPeg[i].getRow();
-                    column = Board.getPeg[i].getColumn();
-                    height = Board.getPeg[i].getLength();
+                    b1 = Board.getPeg[i].beadlist[0];
+                    b2 = Board.getPeg[i].beadlist[1];
+                    b3 = Board.getPeg[i].beadlist[2];
                     
-                    move = new Loc3d(row, column, height);
+                    if(b1.getColour() == b2.getColour() && b2.getColour() == b3.getColour()) {
+                        row = Board.getPeg[i].getRow();
+                        column = Board.getPeg[i].getColumn();
+                        height = Board.getPeg[i].getLength();
+                    
+                        move = new Loc3d(row, column, height);
+                        i = Board.getPeg[].length;
+                    }
                 }
                 else
-                    i++;
+                    move = randomPlay();
             }
-            move = randomPlay();
         }
+        
         turnCount++;
         return move;
     }
@@ -103,7 +116,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     }
     
     private boolean isFirstFour() {
-        return (turnCount < 5);
+        return (turnCount < 9);
     }
     
     private Loc3d randomPlay() {
