@@ -22,6 +22,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     private Colour colour;
     private GameOverStatus gameOverStatus;
     private int opponent;
+    private int turnCount;
     
     public AI() {
         reset();
@@ -31,7 +32,8 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     public void reset() throws PlayerException {
         startGameAs(Referee.assignColour());
         gameOverStatus = null;
-        //or whatever method from referee class assigns colours
+        opponent = 0;
+        turnCount = 1;
     }
     
     @Override
@@ -51,10 +53,44 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     }
     
     @Override
-    public Location requestMoveLocation() throws PlayerException {
-        Location move;
+    public Loc3d requestMoveLocation() throws PlayerException {
+        Loc3d move;
+        //for choosing a peg at random
+        
+        int row;
+        int column;
+        int height;
+        
+        if(isFirstFour()) {
+            if(Board.getPeg[0].getLength() == 0) {
+                move = new Loc3d(3, 0, 0);
+            }
+            else if(Board.getPeg[3].getLength() == 0) {
+                move = new Loc3d(3, 3, 0);
+            }
+            else if(Board.getPeg[12].getLength() == 0) {
+                move = new Loc3d(0, 0, 0);
+            }
+            else if(Board.getPeg[15].getLength() == 0) {
+                move = new Loc3d(0, 3, 0);
+            }
+        }
+        else {
+            for(int i = 0; i < Board.getPeg[].length; i++) {
+                if(Board.getPeg[i].getLength() == 3) {
+                    row = Board.getPeg[i].getRow();
+                    column = Board.getPeg[i].getColumn();
+                    height = Board.getPeg[i].getLength();
+                    
+                    move = new Loc3d(row, column, height);
+                }
+                else
+                    i++;
+            }
+            move = randomPlay();
+        }
+        turnCount++;
         return move;
-        /*pick a peg at random and check if it's full? or send random 3D/2D location*/
     }
     
     @Override
@@ -64,5 +100,27 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     
     public abstract void noteGameOver(GameOverStatus whatHappened) throws PlayerException {
         gameOverStatus = whatHappened;
+    }
+    
+    private boolean isFirstFour() {
+        return (turnCount < 5);
+    }
+    
+    private Loc3d randomPlay() {
+        Loc3d move;
+        Random random = new Random();
+        boolean isLegal = false;
+        while(!isLegal) {
+            int randomIndex = random.nextInt(4);
+            
+            if(Board.getPeg[randomIndex].getLength() < 4) {
+                int row = Board.getPeg[randomIndex].getRow();
+                int col = Board.getPeg[randomIndex].getColumn();
+                int height = Board.getPeg[randomIndex].getLength();
+                move = new Loc3d(row, col, height);
+                isLegal = true;
+            }
+        }
+        return move;
     }
 }
