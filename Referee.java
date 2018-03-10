@@ -5,7 +5,7 @@
  */
 package ca.unbc.cpsc.latte;
 import ca.unbc.cpsc.latte.Loc3d;
-import ca.unbc.cpsc.latte.Loc2d;
+import ca.unbc.cpsc.latte.Loc2d; //Jordan: Don't need this, this was just a test class
 import ca.unbc.cpsc.latte.Bead;
 import ca.unbc.cpsc.latte.player;
 import ca.unbc.cpsc.latte.AI;
