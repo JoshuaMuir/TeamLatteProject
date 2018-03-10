@@ -26,10 +26,12 @@ public class TempMain {
      *
      */
     public static void main(String[] args) {
+        
         Board myBoard = new Board();
         
-        Loc2d pass = new Loc2d(1,1);
-        
+        Bead b = new Bead(Colour c, player.getLocation, board.getPeg(player.getLocation()).getLength)
+        board.getPeg(player.getLocation()).addbead(0,b);
+        board.addtoLines(b);
 
     }
 }
