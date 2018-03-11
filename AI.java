@@ -114,7 +114,8 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
         requestMoveLocation();
     }
     
-    public abstract void noteGameOver(GameOverStatus whatHappened) throws PlayerException {
+    @Override
+    public void noteGameOver(GameOverStatus whatHappened) throws PlayerException {
         gameOverStatus = whatHappened;
     }
     
