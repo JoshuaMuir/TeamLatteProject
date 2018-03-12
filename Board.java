@@ -1,8 +1,9 @@
 package ca.unbc.cpsc.latte;
 
+import ca.unbc.cpsc.score4.interfaces.Location;
+
 public class Board {
 
-    //vars private or public final?
     public final Line[] sx0 = new Line[16]; //refers to face where x is zero
     public final Line[] sy0 = new Line[16];
     public final Peg[] sz0 = new Peg[16];

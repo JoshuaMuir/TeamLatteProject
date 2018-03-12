@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package ca.unbc.cpsc.latte;//ask about interfaces package?
+package ca.unbc.cpsc.score4.interfaces;//ask about interfaces package?
 
 /**
  *

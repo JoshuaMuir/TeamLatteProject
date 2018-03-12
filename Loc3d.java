@@ -1,5 +1,7 @@
 package ca.unbc.cpsc.latte;
 
+import ca.unbc.cpsc.score4.interfaces.Location;
+
 public class Loc3d implements Location {
 
     private int row;
@@ -14,6 +16,7 @@ public class Loc3d implements Location {
     public static final int MAX_HEIGHT = 3;
 
     public Loc3d(int r, int c, int h) {
+        
         row = r;
         col = c;
         height = h;
