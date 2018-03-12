@@ -31,6 +31,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
         gameOverStatus = null;
         turnCount = 1;
         board = new Board();
+        board.changehasWin(false);
     }
     
     @Override
