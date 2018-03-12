@@ -19,7 +19,7 @@ import ca.unbc.cpsc.latte.Referee;
 import java.util.Random;
 
 public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
-    private Colour colour;
+    private PlayerColour colour;
     private GameOverStatus gameOverStatus;
     private int opponent;
     //this is also not necessary and not used for anything but i'll just keep it anyway in case Casperson wants to do something
@@ -50,7 +50,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     }
     
     @Override
-    public void startGameAs(Colour c) throws PlayerException {
+    public void startGameAs(PlayerColour c) throws PlayerException {
         colour = c;
     }
     
