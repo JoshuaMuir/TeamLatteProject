@@ -39,6 +39,14 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
         gameOverStatus = null;
         opponent = 0;
         turnCount = 1;
+        
+        /*
+        one BIG question I have is whether Referee calls all the methods like startGameAs(), noteOpponentsId(), or if
+        the referee just calls reset() and those methods get called by the AI's reset() method. like for example should
+        I call those methods in this method or does the Referee do that for me? if I am calling those methods I will need 
+        to receive information from the Referee that the Referee receives from Player etc. Very complicated, I know.
+        */
+        
     }
     
     @Override
