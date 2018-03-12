@@ -1,7 +1,5 @@
 package ca.unbc.cpsc.latte;
 
-import java.util.ArrayList;
-
 public class Peg extends Line{
     private final int myRow;
     private final int myCol;
@@ -32,7 +30,6 @@ public class Peg extends Line{
     public void addBead(int i, Bead b) {//i is not used for anything here
         //but it is necessary for the line object which it extends
         super.addBead(length, b);
-        //using location of bead, add to appropriate lines;
 
     }
 
