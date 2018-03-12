@@ -13,6 +13,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     private int turnCount;
     private Board board;
     private Loc3d lastmove;
+    private static numWins = 0;
     
     public AI() throws PlayerException{
         reset();
@@ -115,11 +116,18 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     @Override
     public void noteGameOver(GameOverStatus whatHappened) throws PlayerException {
         gameOverStatus = whatHappened;
+        
+        if(gameOverStatus == GameOverStatus.WIN)
+            numWins++;
+    }
+    
+    public int getNumWins() {
+        //returns the amount of times AI has ever won a game
+        return numWins;
     }
     
     private boolean isFirstFour() {
         return (turnCount < 9);
-        //first four AI turns, 8 turns total
     }
     
     private Loc3d randomPlay() {
@@ -141,6 +149,8 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
                 isLegal = true;
             }
         }
+        //alternately, I just let the Referee do all the checking and just return whatever random location is generated
+        
         return move;
     }
 }
