@@ -6,9 +6,10 @@ public class Line {
     protected Bead[] beadlist = new Bead[4];
     //beadlist[0] is at lowest possible height, col, row
     //goes, left to right, bottom to top, smallest row position to largest
-
-    public Line() {
-
+    private Board board;
+    
+    public Line(Board b) {
+        board = b;
     }
 
     public void addBead(int i, Bead b) {//i is from 0 to 3
@@ -20,7 +21,7 @@ public class Line {
                         && beadlist[1].isBlack() == beadlist[2].isBlack()
                         && beadlist[2].isBlack() == beadlist[3].isBlack()) 
                 {
-                    //return game over somehow
+                    board.changehasWin(true);
                 }
             }
         } else {
