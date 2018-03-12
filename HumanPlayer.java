@@ -21,6 +21,8 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         getting this information from the referee probably.
         reset the state of GUI. 
         maybe a message?
+        
+        Edit: This information is probably coming from the GUI, then being sent to the referee for a reset?..
         */
     }
     
@@ -30,6 +32,8 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         GUI should display player's colour
         so need to get that info to the GUI,
         from the referee.
+        
+        Edit: This info is also being originiated in the GUI, or?
         */
     }    
     
@@ -61,6 +65,8 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         also, Location instead of Loc3d? it's "Location" in the document
         
         loc3d is our class that implements Location interface, which we are allowed to use.
+        
+        oh. ok. :)
         */
     }
     
@@ -69,6 +75,8 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         /*
         pop-up message requesting another move from GUI?
         gathering this from referee and sending to GUI.
+        
+        Edit: Also originating from GUI, then being sent to referee?
         */
         return requestMoveLocation();
     }
@@ -77,11 +85,11 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
     public void noteGameOver(GameOverStatus whatHappened) throws PlayerException {
         /*
         pop-up message on GUI indicating game-over
-        happens after referee sends this info
+        happens after referee sends this info.
         */
     }
     
-    //possibly some private methods should be added if necessary.
+    //possibly some private methods should be added if necessary
  
     
 }
