@@ -1,26 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author mojox
- */
+
 package ProjectGraphics;
 
 import java.awt.BorderLayout;
-import static java.awt.BorderLayout.EAST;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class NotGraphics extends JFrame {
 
@@ -31,6 +21,17 @@ public class NotGraphics extends JFrame {
     public static int peg02 = 0;
     public static int peg03 = 0;
     public static int peg10 = 0;
+    public static int peg11=0;
+    public static int peg12=0;
+    public static int peg13=0;
+    public static int peg20=0;
+    public static int peg21=0;
+     public static int peg22=0;
+      public static int peg23=0;
+       public static int peg30=0;
+        public static int peg31=0;
+         public static int peg32=0;
+          public static int peg33=0;
     public static int whomTurn=0;
 
     public static void main(String[] args) {
@@ -53,7 +54,7 @@ public class NotGraphics extends JFrame {
         panool.setLayout(new BoxLayout(panool, BoxLayout.X_AXIS));
         JButton butoon = new JButton("Place beed at 0,0");
         JButton buffoon = new JButton("Place beed at 0,1");
-        ActionListener kurt = new doActionListener();
+        //ActionListener kurt = new doActionListener();
         panool.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 System.out.println(e.getX() + " " + e.getY());
@@ -63,124 +64,143 @@ public class NotGraphics extends JFrame {
                     HelloComponent hi = new HelloComponent();
                     froome.setSize(1001, 900);
                     froome.setSize(1000, 900);
-                    // GoodbyeComponent bye = new GoodbyeComponent();
-                    //System.out.println("workds");
                     System.out.println("peg00 is" + peg00);
                     System.out.println("peg01 is" + peg01);
-                    hi.repaint();
-                    hi.repaint();
-                    hi.repaint();
-                    hi.paintComponent(HelloComponent.g2);
-                    for (int i = 0; i < 10; ++i) {
-                        hi.repaint();
-                    }
-                    for (int i = 0; i < 100; ++i) {
-                        hi.repaint();
-                    }
-                    jooble.setText("hi");
-                    if (peg00 == 2) {
-                        jooble.setText("bye");
-                    } else;
                 } else if ((e.getX() > 255 && e.getX() < 275) && e.getY() > 390 && e.getY() < 482) {
                     ++peg01;
-++whomTurn;
-                    //HelloComponent hi = new HelloComponent();
-                    //GoodbyeComponent bye = new GoodbyeComponent();
-                    //System.out.println("workds");
+                    ++whomTurn;
+ 
                     System.out.println("peg 00 is" + peg00);
                     System.out.println("peg 01 is" + peg01);
                     jooble.setText("hi");
                     HelloComponent hi = new HelloComponent();
-                    hi.repaint();
                     froome.setSize(1001, 900);
                     froome.setSize(1000, 900);
-                    hi.repaint();
-                    hi.paintComponent(HelloComponent.g2);
-                    hi.repaint();
-                    for (int i = 0; i < 10; ++i) {
-                        hi.repaint();
-                    }
-                    for (int i = 0; i < 100; ++i) {
-                        hi.repaint();
-                    }
-                    if (peg00 == 2) {
-                        jooble.setText("bye");
-                    } else;
+
 
                 } else if ((e.getX() > 325 && e.getX() < 345) && e.getY() > 437 && e.getY() < 534) {
                     ++peg02;
-++whomTurn;
+                    ++whomTurn;
                     HelloComponent hi = new HelloComponent();
-                    hi.repaint();
-                    hi.repaint();
+
                     froome.setSize(1001, 900);
                     froome.setSize(1000, 900);
-                    hi.repaint();
-                    hi.paintComponent(HelloComponent.g2);
-                    for (int i = 0; i < 10; ++i) {
-                        hi.repaint();
-                    }
-                    for (int i = 0; i < 100; ++i) {
-                        hi.repaint();
-                    }
-                    // GoodbyeComponent bye = new GoodbyeComponent();
-                    //System.out.println("workds");
+
                     System.out.println("peg 00 is" + peg00);
                     System.out.println("peg 02 is" + peg02);
-                    jooble.setText("hi");
-                    if (peg00 == 2) {
-                        jooble.setText("bye");
-                    } else;
+
 
                 } else if ((e.getX() > 395 && e.getX() < 415) && e.getY() > 477 && e.getY() < 584) {
 
                     ++peg03;
-++whomTurn;
+                    ++whomTurn;
                     HelloComponent hi = new HelloComponent();
-                    hi.repaint();
                     froome.setSize(1001, 900);
                     froome.setSize(1000, 900);
-                    //  hi.paint();
-                    hi.paintComponent(HelloComponent.g2);
-                    for (int i = 0; i < 10; ++i) {
-                        hi.repaint();
-                    }
-                    for (int i = 0; i < 100; ++i) {
-                        hi.repaint();
-                    }
-                    // GoodbyeComponent bye = new GoodbyeComponent();
-                    //System.out.println("workds");
+
                     System.out.println("peg 00 is" + peg00);
                     System.out.println("peg 02 is" + peg02);
                     jooble.setText("hi");
-                    if (peg00 == 2) {
-                        jooble.setText("bye");
-                    } else;
+                 
 
                 } else if ((e.getX() > 285 && e.getX() < 305) && e.getY() > 310 && e.getY() < 410) {
 
                     ++peg10;
-++whomTurn;
+                    ++whomTurn;
                     HelloComponent hi = new HelloComponent();
-                    hi.repaint();
                     froome.setSize(1001, 900);
                     froome.setSize(1000, 900);
-                    //  hi.paint();
-                    hi.paintComponent(HelloComponent.g2);
-                    for (int i = 0; i < 10; ++i) {
-                        hi.repaint();
-                    }
-                    for (int i = 0; i < 100; ++i) {
-                        hi.repaint();
-                    }
-                    // GoodbyeComponent bye = new GoodbyeComponent();
-                    //System.out.println("workds");
                     System.out.println("peg 00 is" + peg00);
                     System.out.println("peg 02 is" + peg02);
-                    jooble.setText("hi");
-                    if (peg00 == 2) {
-                        jooble.setText("bye");
-                    } else;
+                 
+                } else if ((e.getX() > 355 && e.getX() < 375) && e.getY() > 370 && e.getY() < 450) {
+                    ++peg11;
+                    ++whomTurn;
+                    HelloComponent hi = new HelloComponent();
+                    froome.setSize(1001, 900);
+                    froome.setSize(1000, 900);
+                    System.out.println("peg00 is" + peg00);
+                    System.out.println("peg01 is" + peg01);
+                }else if ((e.getX() > 420 && e.getX() < 440) && e.getY() > 410 && e.getY() < 510) {
+                    ++peg12;
+                    ++whomTurn;
+                    HelloComponent hi = new HelloComponent();
+                    froome.setSize(1001, 900);
+                    froome.setSize(1000, 900);
+                    System.out.println("peg00 is" + peg00);
+                    System.out.println("peg01 is" + peg01);
+                } else if ((e.getX() > 490 && e.getX() < 510) && e.getY() > 460 && e.getY() < 560) {
+                    ++peg13;
+                    ++whomTurn;
+                    HelloComponent hi = new HelloComponent();
+                    froome.setSize(1001, 900);
+                    froome.setSize(1000, 900);
+                    System.out.println("peg00 is" + peg00);
+                    System.out.println("peg01 is" + peg01);
+                } else if ((e.getX() > 385 && e.getX() < 405) && e.getY() > 300 && e.getY() < 395) {
+                    ++peg20;
+                    ++whomTurn;
+                    HelloComponent hi = new HelloComponent();
+                    froome.setSize(1001, 900);
+                    froome.setSize(1000, 900);
+                    System.out.println("peg00 is" + peg00);
+                    System.out.println("peg01 is" + peg01);
+                } else if ((e.getX() > 455 && e.getX() < 475) && e.getY() > 345 && e.getY() < 460) {
+                    ++peg21;
+                    ++whomTurn;
+                    HelloComponent hi = new HelloComponent();
+                    froome.setSize(1001, 900);
+                    froome.setSize(1000, 900);
+                    System.out.println("peg00 is" + peg00);
+                    System.out.println("peg01 is" + peg01);
+                } else if ((e.getX() > 515 && e.getX() < 535) && e.getY() > 390 && e.getY() < 500) {
+                    ++peg22;
+                    ++whomTurn;
+                    HelloComponent hi = new HelloComponent();
+                    froome.setSize(1001, 900);
+                    froome.setSize(1000, 900);
+                    System.out.println("peg00 is" + peg00);
+                    System.out.println("peg01 is" + peg01);
+                } else if ((e.getX() > 575 && e.getX() < 595) && e.getY() > 430 && e.getY() < 530) {
+                    ++peg23;
+                    ++whomTurn;
+                    HelloComponent hi = new HelloComponent();
+                    froome.setSize(1001, 900);
+                    froome.setSize(1000, 900);
+                    System.out.println("peg00 is" + peg00);
+                    System.out.println("peg01 is" + peg01);
+                } else if ((e.getX() > 495 && e.getX() < 515) && e.getY() > 280 && e.getY() < 380) {
+                    ++peg30;
+                    ++whomTurn;
+                    HelloComponent hi = new HelloComponent();
+                    froome.setSize(1001, 900);
+                    froome.setSize(1000, 900);
+                    System.out.println("peg00 is" + peg00);
+                    System.out.println("peg01 is" + peg01);
+                } else if ((e.getX() > 555 && e.getX() < 575) && e.getY() > 320 && e.getY() < 420) {
+                    ++peg31;
+                    ++whomTurn;
+                    HelloComponent hi = new HelloComponent();
+                    froome.setSize(1001, 900);
+                    froome.setSize(1000, 900);
+                    System.out.println("peg00 is" + peg00);
+                    System.out.println("peg01 is" + peg01);
+                } else if ((e.getX() > 615 && e.getX() < 635) && e.getY() > 360 && e.getY() < 460) {
+                    ++peg32;
+                    ++whomTurn;
+                    HelloComponent hi = new HelloComponent();
+                    froome.setSize(1001, 900);
+                    froome.setSize(1000, 900);
+                    System.out.println("peg00 is" + peg00);
+                    System.out.println("peg01 is" + peg01);
+                } else if ((e.getX() > 675 && e.getX() < 695) && e.getY() > 400 && e.getY() < 500) {
+                    ++peg33;
+                    ++whomTurn;
+                    HelloComponent hi = new HelloComponent();
+                    froome.setSize(1001, 900);
+                    froome.setSize(1000, 900);
+                    System.out.println("peg00 is" + peg00);
+                    System.out.println("peg01 is" + peg01);
                 }
 
             }
@@ -202,7 +222,7 @@ public class NotGraphics extends JFrame {
             public void actionPerformed(ActionEvent event) {
                 ++peg00;
                 HelloComponent hi = new HelloComponent();
-                GoodbyeComponent bye = new GoodbyeComponent();
+                //GoodbyeComponent bye = new GoodbyeComponent();
                 System.out.println("workds");
                 System.out.println(peg00);
                 jooble.setText("hi");
@@ -213,15 +233,6 @@ public class NotGraphics extends JFrame {
             }
         });
 
-        hi.repaint();
-        hi.repaint();
-        hi.repaint();
-        hi.repaint();
-        hi.repaint();
-
-        for (int i = 0; i < 100; ++i) {
-            hi.repaint();
-        }
         panool.add(hi);
         pindle.add(hi);
         smash.add(jooble);
@@ -233,7 +244,7 @@ public class NotGraphics extends JFrame {
         prandel.add(trick, BorderLayout.SOUTH);
         panool.add(prandel, BorderLayout.NORTH);
         panool.add(pindle, BorderLayout.SOUTH);
-        panool.add(jooble, BorderLayout.EAST);
+    //    panool.add(jooble, BorderLayout.EAST);
 
         butoon.setBounds(20, 20, 20, 20);
         butoon.setPreferredSize(new Dimension(200, 25));
