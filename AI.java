@@ -131,14 +131,14 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
         while(!isLegal) {
             int randomIndex = random.nextInt(4);
             
-            if(board.getPeg(randomIndex).getLength() < 4) { //if peg isn't full
-                int row = board.getPeg(randomIndex).getRow();
-                int col = board.getPeg(randomIndex).getColumn();
-                int height = board.getPeg(randomIndex).getLength();
-                
-                move = new Loc3d(row, col, height);
+            int row = board.getPeg(randomIndex).getRow();
+            int col = board.getPeg(randomIndex).getColumn();
+            int height = board.getPeg(randomIndex).getLength();
+            
+            move = new Loc3d(row, col, height);
+            
+            if(Referee.checkMove(move)) { //if peg isn't full
                 isLegal = true;
-                //exit loop
             }
         }
         return move;
