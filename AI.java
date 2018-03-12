@@ -11,7 +11,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     private GameOverStatus gameOverStatus;
     private int opponent;
     private int turnCount;
-    private Board board = new Board();
+    private Board board;
     private Loc3d lastmove;
     
     public AI() throws PlayerException{
