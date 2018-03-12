@@ -59,6 +59,8 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         call a method in GUI requesting for a move location
         (that's one way to do it)
         also, Location instead of Loc3d? it's "Location" in the document
+        
+        loc3d is our class that implements Location interface, which we are allowed to use.
         */
     }
     
