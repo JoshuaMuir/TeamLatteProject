@@ -1,4 +1,3 @@
-
 package projectgraphics;
 
 import java.awt.BorderLayout;
@@ -12,7 +11,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class NotGraphics extends JFrame {
+
+public class NotGraphics  {
 
     public JFrame froome;
     private JLabel jooble;
@@ -21,21 +21,21 @@ public class NotGraphics extends JFrame {
     public static int peg02 = 0;
     public static int peg03 = 0;
     public static int peg10 = 0;
-    public static int peg11=0;
-    public static int peg12=0;
-    public static int peg13=0;
-    public static int peg20=0;
-    public static int peg21=0;
-     public static int peg22=0;
-      public static int peg23=0;
-       public static int peg30=0;
-        public static int peg31=0;
-         public static int peg32=0;
-          public static int peg33=0;
-    public static int whomTurn=0;
-        public static int a=0;
-    public static int c=0;
-public static int b=0;
+    public static int peg11 = 0;
+    public static int peg12 = 0;
+    public static int peg13 = 0;
+    public static int peg20 = 0;
+    public static int peg21 = 0;
+    public static int peg22 = 0;
+    public static int peg23 = 0;
+    public static int peg30 = 0;
+    public static int peg31 = 0;
+    public static int peg32 = 0;
+    public static int peg33 = 0;
+    public static int whomTurn = 0;
+    public static int a = 0;
+    public static int c = 0;
+    public static int b = 0;
 
     public static void main(String[] args) {
 //JLabel jooble=new JLabel("This one");
@@ -48,89 +48,121 @@ public static int b=0;
         HelloComponent hi = new HelloComponent();
 //Board bird=new Board();
         JLabel jooble = new JLabel("This one");
+//        HumanPlayer Josh = new HumanPlayer();
         JFrame froome = new JFrame();
+        //Player Josh=new Player();
+
+       // Colour old=new Colour();
         JPanel panool = new JPanel();
         JPanel prandel = new JPanel();
         JPanel pindle = new JPanel();
         JPanel smash = new JPanel();
         JPanel trick = new JPanel();
-         JPanel what=new JPanel();
+        JPanel what = new JPanel();
         panool.setLayout(new BoxLayout(panool, BoxLayout.X_AXIS));
         JButton butoon = new JButton("Place beed at 0,0");
         JButton buffoon = new JButton("QUIT");
-JButton berten=new JButton("  RESET  ");
-        JToggleButton twitch=new JToggleButton("BLACK");
-        JToggleButton twitch2=new JToggleButton("WHITE");
-          what.add(twitch2);
-          //what.add(butoon); 
-          what.add(twitch);
+        JButton berten = new JButton("  RESET  ");
+        JToggleButton twitch = new JToggleButton("BLACK");
+        JToggleButton twitch2 = new JToggleButton("WHITE");
+        what.add(twitch2);
+        //what.add(butoon); 
+        
+        what.add(twitch);
         what.add(berten);
-        berten.addActionListener(new ActionListener(){
-        public void actionPerformed(ActionEvent ae){
-        peg00=0;
-        peg01=0;
-        peg02=0;
-        peg03=0;
-        peg10=0;
-        peg11=0;
-        peg12=0;
-        peg13=0;
-        peg20=0;
-        peg21=0;
-        peg22=0;
-        peg23=0;
-        peg30=0;
-        peg31=0;
-        peg32=0;
-        peg33=0;
-                
-                
-        whomTurn=0;
-        
-        froome.setSize(1001,900);
-        froome.setSize(1000,900);
-        
-        }});
-buffoon.addActionListener(new ActionListener(){
-          public void actionPerformed(ActionEvent ae){
-          
-          System.exit(0);
-          
-          
-          }
-      
-      });
-twitch.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent ae){
-                if(c==1)twitch.removeActionListener(this);else{
-                    a++;
-                
-                System.out.println("whats this");
-                twitch.removeActionListener(this);}
-                
-                
-                }
-        
-        
+        berten.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+               
+                peg00 = 0;
+                peg01 = 0;
+                peg02 = 0;
+                peg03 = 0;
+                peg10 = 0;
+                peg11 = 0;
+                peg12 = 0;
+                peg13 = 0;
+                peg20 = 0;
+                peg21 = 0;
+                peg22 = 0;
+                peg23 = 0;
+                peg30 = 0;
+                peg31 = 0;
+                peg32 = 0;
+                peg33 = 0;
+                a=0;
+                c=0;
+                twitch.setEnabled(true);
+                twitch2.setEnabled(true);
+                twitch2.setSelected(false);
+                twitch.setSelected(false);
+              
+                whomTurn = 0;
+
+                froome.setSize(1001, 900);
+                froome.setSize(1000, 900);
+                HelloComponent hi=new HelloComponent();
+               //runGUI();
+               //System.exit(4);
+            }
         });
-        twitch2.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent ae){
-                if(a==1)
-                    twitch2.removeActionListener(this);else{
+        buffoon.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+
+                System.exit(0);
+
+            }
+
+        });
+        twitch.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                if (c == 1) {
+                    return;
+                } else if(a==0) {
+                    a++;
+                    whomTurn=0;
+                    System.out.println("this shows that the black button is has been pressed");
+                    System.out.println("whomTurn is now" +whomTurn);
+                     froome.setSize(1000,900);
+                    froome.setSize(1001,900);
+                    twitch.setEnabled(false);
+                    twitch2.setEnabled(false);
+                    HelloComponent hi=new HelloComponent();
+                    //twitch.removeActionListener(this);
+                }else return;
+
+            }
+
+        });
+        twitch2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                System.out.println("whom turn is"+whomTurn);
+                if (a == 1) {
+                    return;
+                } else if(c==0) {
                     c++;
-                    ++whomTurn;
-                System.out.println("this worked");
-                twitch2.removeActionListener(this);}
-                }
-        
-        
+                    whomTurn=1;
+                    froome.setSize(1000,900);
+                    froome.setSize(1001,900);
+                   System.out.println("this shows that the white button is has been pressed");
+                   System.out.println("whomTurn is now"+whomTurn);
+                    twitch2.setEnabled(false);
+                    twitch.setEnabled(false);HelloComponent hi=new HelloComponent();
+                   // twitch2.removeActionListener(this);
+                }else return;
+            }
+
         });
         //ActionListener kurt = new doActionListener();
         panool.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                if(a==0&&c==0){
+                
+                System.out.println("you must select a color");
+                return;}else;
                 System.out.println(e.getX() + " " + e.getY());
                 if ((e.getX() > 185 && e.getX() < 205) && e.getY() > 330 && e.getY() < 440) {
                     ++peg00;
+                   // Josh.requestMoveLocation();
                     ++whomTurn;
                     HelloComponent hi = new HelloComponent();
                     froome.setSize(1001, 900);
@@ -140,14 +172,13 @@ twitch.addActionListener(new ActionListener(){
                 } else if ((e.getX() > 255 && e.getX() < 275) && e.getY() > 390 && e.getY() < 482) {
                     ++peg01;
                     ++whomTurn;
- 
+
                     System.out.println("peg 00 is" + peg00);
                     System.out.println("peg 01 is" + peg01);
                     jooble.setText("hi");
                     HelloComponent hi = new HelloComponent();
                     froome.setSize(1001, 900);
                     froome.setSize(1000, 900);
-
 
                 } else if ((e.getX() > 325 && e.getX() < 345) && e.getY() > 437 && e.getY() < 534) {
                     ++peg02;
@@ -160,7 +191,6 @@ twitch.addActionListener(new ActionListener(){
                     System.out.println("peg 00 is" + peg00);
                     System.out.println("peg 02 is" + peg02);
 
-
                 } else if ((e.getX() > 395 && e.getX() < 415) && e.getY() > 477 && e.getY() < 584) {
 
                     ++peg03;
@@ -172,7 +202,6 @@ twitch.addActionListener(new ActionListener(){
                     System.out.println("peg 00 is" + peg00);
                     System.out.println("peg 02 is" + peg02);
                     jooble.setText("hi");
-                 
 
                 } else if ((e.getX() > 285 && e.getX() < 305) && e.getY() > 310 && e.getY() < 410) {
 
@@ -183,7 +212,7 @@ twitch.addActionListener(new ActionListener(){
                     froome.setSize(1000, 900);
                     System.out.println("peg 00 is" + peg00);
                     System.out.println("peg 02 is" + peg02);
-                 
+
                 } else if ((e.getX() > 355 && e.getX() < 375) && e.getY() > 370 && e.getY() < 450) {
                     ++peg11;
                     ++whomTurn;
@@ -192,7 +221,7 @@ twitch.addActionListener(new ActionListener(){
                     froome.setSize(1000, 900);
                     System.out.println("peg00 is" + peg00);
                     System.out.println("peg01 is" + peg01);
-                }else if ((e.getX() > 420 && e.getX() < 440) && e.getY() > 410 && e.getY() < 510) {
+                } else if ((e.getX() > 420 && e.getX() < 440) && e.getY() > 410 && e.getY() < 510) {
                     ++peg12;
                     ++whomTurn;
                     HelloComponent hi = new HelloComponent();
@@ -300,23 +329,23 @@ twitch.addActionListener(new ActionListener(){
                 if (peg00 == 2) {
                     jooble.setText("bye");
                 } else;
-            
+
             }
         });
 
         panool.add(hi);
         pindle.add(hi);
-        smash.add(jooble);
+        // smash.add(jooble);
         panool.setLayout(new BorderLayout());
         prandel.setLayout(new FlowLayout());
         prandel.setSize(100, 100);
 
         trick.add(buffoon);
         prandel.add(trick, BorderLayout.SOUTH);
-     prandel.add(what);
+        prandel.add(what);
         panool.add(prandel, BorderLayout.NORTH);
         panool.add(pindle, BorderLayout.SOUTH);
-        panool.add(jooble, BorderLayout.EAST);
+        //panool.add(jooble, BorderLayout.EAST);
 
         butoon.setBounds(20, 20, 20, 20);
         butoon.setPreferredSize(new Dimension(200, 25));
@@ -325,6 +354,7 @@ twitch.addActionListener(new ActionListener(){
         froome.setSize(1000, 900);
         froome.setSize(1001, 900);
         froome.setSize(1000, 900);
+        froome.setLocation(500, 100);
 
         froome.setTitle("Score 4");
         froome.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -336,8 +366,17 @@ twitch.addActionListener(new ActionListener(){
 
         panool.add(hi);
 
-
         System.out.println("hmm");
+    }
+
+    @Override
+    public boolean isBlack() {
+        return true;
+    }
+
+    @Override
+    public boolean isWhite() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
