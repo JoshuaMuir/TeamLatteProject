@@ -22,7 +22,10 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     private Colour colour;
     private GameOverStatus gameOverStatus;
     private int opponent;
+    //this is also not necessary and not used for anything but i'll just keep it anyway in case Casperson wants to do something
+    //in the tournament with it
     private int turnCount;
+    //turnCount is not necessary it's just a counter for my AI's strategy etc.
     
     public AI() {
         reset();
@@ -32,6 +35,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     public void reset() throws PlayerException {
         startGameAs(Referee.assignColour());
         //not sure if AI calls the referee method or if the referee calls AI.startGameAs directly
+        //also not sure what this method will be called
         gameOverStatus = null;
         opponent = 0;
         turnCount = 1;
