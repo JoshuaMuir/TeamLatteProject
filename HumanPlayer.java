@@ -10,6 +10,7 @@ package ca.unbc.cpsc.latte;
  * @author talha
  */
 public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
+    //might want to have some private member variables like a colour, gameoverstatus, etc
     
     public HumanPlayer() {
         
@@ -23,6 +24,8 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         maybe a message?
         
         Edit: This information is probably coming from the GUI, then being sent to the referee for a reset?..
+        
+        yeah for our program, it's the user who calls reset. only in david's tournament director will the ref call reset i think
         */
     }
     
@@ -34,6 +37,8 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         from the referee.
         
         Edit: This info is also being originiated in the GUI, or?
+        
+        yes, the player chooses their own colour
         */
     }    
     
@@ -43,6 +48,8 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         getting this information from the referee.
         send to GUI and show opponent's ID on screen(?),
         but we can just skip this because it says so in the document.
+        
+        yeah i don't think we need this really
         */
     }
     
@@ -77,6 +84,9 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         gathering this from referee and sending to GUI.
         
         Edit: Also originating from GUI, then being sent to referee?
+        
+        I think so, yes. In our program it's pretty much the user that makes decisions
+        
         */
         return requestMoveLocation();
     }
