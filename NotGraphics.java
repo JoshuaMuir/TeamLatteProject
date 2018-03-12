@@ -1,5 +1,5 @@
 
-package ProjectGraphics;
+package projectgraphics;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -33,6 +33,9 @@ public class NotGraphics extends JFrame {
          public static int peg32=0;
           public static int peg33=0;
     public static int whomTurn=0;
+        public static int a=0;
+    public static int c=0;
+public static int b=0;
 
     public static void main(String[] args) {
 //JLabel jooble=new JLabel("This one");
@@ -41,7 +44,7 @@ public class NotGraphics extends JFrame {
 
     private static void runGUI() {
 
-        Board bird = new Board();
+        //Board bird = new Board();
         HelloComponent hi = new HelloComponent();
 //Board bird=new Board();
         JLabel jooble = new JLabel("This one");
@@ -51,9 +54,77 @@ public class NotGraphics extends JFrame {
         JPanel pindle = new JPanel();
         JPanel smash = new JPanel();
         JPanel trick = new JPanel();
+         JPanel what=new JPanel();
         panool.setLayout(new BoxLayout(panool, BoxLayout.X_AXIS));
         JButton butoon = new JButton("Place beed at 0,0");
-        JButton buffoon = new JButton("Place beed at 0,1");
+        JButton buffoon = new JButton("QUIT");
+JButton berten=new JButton("  RESET  ");
+        JToggleButton twitch=new JToggleButton("BLACK");
+        JToggleButton twitch2=new JToggleButton("WHITE");
+          what.add(twitch2);
+          //what.add(butoon); 
+          what.add(twitch);
+        what.add(berten);
+        berten.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent ae){
+        peg00=0;
+        peg01=0;
+        peg02=0;
+        peg03=0;
+        peg10=0;
+        peg11=0;
+        peg12=0;
+        peg13=0;
+        peg20=0;
+        peg21=0;
+        peg22=0;
+        peg23=0;
+        peg30=0;
+        peg31=0;
+        peg32=0;
+        peg33=0;
+                
+                
+        whomTurn=0;
+        
+        froome.setSize(1001,900);
+        froome.setSize(1000,900);
+        
+        }});
+buffoon.addActionListener(new ActionListener(){
+          public void actionPerformed(ActionEvent ae){
+          
+          System.exit(0);
+          
+          
+          }
+      
+      });
+twitch.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent ae){
+                if(c==1)twitch.removeActionListener(this);else{
+                    a++;
+                
+                System.out.println("whats this");
+                twitch.removeActionListener(this);}
+                
+                
+                }
+        
+        
+        });
+        twitch2.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent ae){
+                if(a==1)
+                    twitch2.removeActionListener(this);else{
+                    c++;
+                    ++whomTurn;
+                System.out.println("this worked");
+                twitch2.removeActionListener(this);}
+                }
+        
+        
+        });
         //ActionListener kurt = new doActionListener();
         panool.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -242,9 +313,10 @@ public class NotGraphics extends JFrame {
 
         trick.add(buffoon);
         prandel.add(trick, BorderLayout.SOUTH);
+     prandel.add(what);
         panool.add(prandel, BorderLayout.NORTH);
         panool.add(pindle, BorderLayout.SOUTH);
-    //    panool.add(jooble, BorderLayout.EAST);
+        panool.add(jooble, BorderLayout.EAST);
 
         butoon.setBounds(20, 20, 20, 20);
         butoon.setPreferredSize(new Dimension(200, 25));
