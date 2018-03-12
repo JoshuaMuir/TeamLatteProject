@@ -12,6 +12,7 @@ public class Board {
     public final Line[] ssz0 = new Line[8];
     public final Line[] ds = new Line[4];//ds[0] is at origin
     //ds[1] is at 400, ds[2] is at 440, ds[3] is at 040
+    private boolean hasWin = false;
 
     public Board() {
         init(sx0);
@@ -29,6 +30,8 @@ public class Board {
         }
     }
 
+    public void changehasWin(boolean b){
+        hasWin = b;
     private void init(Peg[] pegArray) {
         for (int i = 0; i < pegArray.length; i++) {
             pegArray[i] = new Peg(3 - i / 4, i % 4);
