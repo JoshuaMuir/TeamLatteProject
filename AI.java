@@ -8,10 +8,17 @@ import java.util.Random;
 
 public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     private Colour colour;
+    private Colour opponentColour;
+    
     private GameOverStatus gameOverStatus;
+    
     private int opponent;
     private int turnCount;
+    
     private Board board;
+    private Peg[] pegs;
+    private Bead[] beads;
+    
     private Loc3d lastmove;
     private static numWins = 0;
     
@@ -38,6 +45,11 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     @Override
     public void startGameAs(Colour c) throws PlayerException {
         colour = c;
+        
+        if(c = PlayerColour.isWhite())
+            opponentColour = PlayerColour.isBlack();
+        else
+            opponentColour = PlayerColour.isWhite();
     }
     
     @Override
@@ -48,6 +60,10 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     @Override
     public void opponentPlays(Location ell) throws PlayerException {
         turnCount++;
+        
+        
+        //i am going to have to have my own placebead methods to keep track of the game board with the locations given
+        //to be by the referee in this method. This is how casperson described the tournament process.
     }
     
     @Override
