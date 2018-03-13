@@ -59,11 +59,16 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     
     @Override
     public void opponentPlays(Location ell) throws PlayerException {
-        turnCount++;
+        int row = ell.getRow();
+        int col = ell.getColumn();
+        int height = ell.getHeight();
         
+        board.getPeg(ell).addBead(0, new Bead(opponentColour, ell, height));
+        //add the opponents last move
+        board.getPeg(lastMove).addBead(0, new Bead(colour, lastMove, lastMove.getHeight()));
+        //add my last move
         
-        //i am going to have to have my own placebead methods to keep track of the game board with the locations given
-        //to be by the referee in this method. This is how casperson described the tournament process.
+        turnCount += 2;
     }
     
     @Override
@@ -118,7 +123,6 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
             }
         }
         
-        turnCount++;
         lastmove = move;
         return move;
     }
@@ -166,6 +170,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
             }
         }
         //alternately, I just let the Referee do all the checking and just return whatever random location is generated
+        //this is probably what i'll do, cause I should not be calling the Referee check method at all.
         
         return move;
     }
