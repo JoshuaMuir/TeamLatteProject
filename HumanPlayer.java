@@ -26,6 +26,7 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         Edit: This information is probably coming from the GUI, then being sent to the referee for a reset?..
         
         yeah for our program, it's the user who calls reset. only in david's tournament director will the ref call reset i think
+        in my program this method just resets all member variables and the constructor basically just calls this method
         */
     }
     
@@ -85,7 +86,8 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         
         Edit: Also originating from GUI, then being sent to referee?
         
-        I think so, yes. In our program it's pretty much the user that makes decisions
+        I think so, yes. In our program it's pretty much the user that makes decisions. referee will also have to call this method
+        if the requested move is illegal
         
         */
         return requestMoveLocation();
