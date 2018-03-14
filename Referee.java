@@ -15,7 +15,7 @@ import ca.unbc.cpsc.score4.interfaces.Colour;
  */
 public class Referee {
  
-    //should probably have a private AI and Player object to ensure communication to those classes.
+    //Jenny: should probably have a private AI and Player object to ensure communication to those classes.
   
     private Colour pc; 
     private Board board;
@@ -25,6 +25,8 @@ public class Referee {
     {
     //communicates with the bead to the peg
     //checkmoves then places the bead
+     
+    //if struggling there is a similar behaviour in the AI.opponentPlays method that adds beads to the AI's own board
     }
 
     public boolean checkMove(Location l)
@@ -32,6 +34,8 @@ public class Referee {
     //communicates with loc3d and loc2d
     //maybe the rules to check
     //checks if its a valid move
+     
+    //Jenny: line conveniently has a check method already that can be called in this method to make things easier
     }
     public void checkWin(Location l)
     {
