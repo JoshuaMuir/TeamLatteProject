@@ -1,4 +1,4 @@
-package projectgraphics;
+package ca.unbc.cpsc.latte;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
