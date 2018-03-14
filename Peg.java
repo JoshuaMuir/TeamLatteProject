@@ -13,8 +13,8 @@ public class Peg extends Line{
     column  0   1   2   3
     */
 
-    public Peg(int r, int c) {
-        super();
+    public Peg(Board b, int r, int c) {
+        super(b);
         myRow = r;
         myCol = c;
     }
