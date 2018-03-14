@@ -51,6 +51,9 @@ public class NotGraphics extends JPanel {
     public static int c = 0;
     public static int b = 0;
   //  private static final Object lock;
+    private static Loc3d lastLoc;
+    private static PlayerColour pc;
+    public static boolean myTurn = true;
 
     public NotGraphics() {
         try {
@@ -60,6 +63,25 @@ public class NotGraphics extends JPanel {
 
         }
 
+    }
+    private static void setLastLoc(Loc3d l){
+        lastLoc = l;
+    }
+    
+    public static Loc3d getLastLoc(){
+        return lastLoc;
+    }
+    
+    private static void setPlayerColour(boolean b){
+        if (b){
+            pc = PlayerColour.w;
+        }else{
+            pc = PlayerColour.b;
+        }
+    }
+    
+    public static PlayerColour getPlayerColour(){
+        return pc;
     }
 
     public static void main(String[] args) {
@@ -275,6 +297,7 @@ public class NotGraphics extends JPanel {
                     mainFrame.setSize(1001, 900);
                     blackButton.setEnabled(false);
                     whiteButton.setEnabled(false);
+                    setPlayerColour(false);
                     GameComponent hi = new GameComponent();
                     bottomLabel.setText("Now Click a Peg!");
                     //twitch.removeActionListener(this);
@@ -299,6 +322,7 @@ public class NotGraphics extends JPanel {
                     System.out.println("whomTurn is now" + whomTurn);
                     whiteButton.setEnabled(false);
                     blackButton.setEnabled(false);
+                    setPlayerColour(true);
                     GameComponent hi = new GameComponent();
                     bottomLabel.setText("Now Click a Peg!");
                     // twitch2.removeActionListener(this);
