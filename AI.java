@@ -61,7 +61,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     public void opponentPlays(Location ell) throws PlayerException {
         int row = ell.getRow();
         int col = ell.getColumn();
-        int height = ell.getHeight();
+        int height = board.getPeg(ell).getLength();
         
         board.getPeg(ell).addBead(0, new Bead(opponentColour, ell, height));
         //add the opponents last move
