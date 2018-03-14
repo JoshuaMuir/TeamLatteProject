@@ -54,7 +54,7 @@ public class Referee {
                  b2 = board.getPeg(i).beadlist[1];
                  b3 = board.getPeg(i).beadlist[2];
                  b4 = board.getPeg(i).beadlist[3];
-                 if(b1.getColour() == b2.getColour() && b2.getColour() == b3.getColour()==b4.getColour()) 
+                 if(b1.getColour() == b2.getColour() == b3.getColour()==b4.getColour()) 
                  {
                      //win
                  return true;
