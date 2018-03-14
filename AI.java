@@ -20,7 +20,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     private Bead[] beads;
     
     private Loc3d lastmove;
-    private static numWins = 0;
+    private static int numWins = 0;
     
     public AI() throws PlayerException{
         reset();
