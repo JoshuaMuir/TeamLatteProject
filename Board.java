@@ -36,7 +36,7 @@ public class Board {
     
     private void init(Peg[] pegArray) {
         for (int i = 0; i < pegArray.length; i++) {
-            pegArray[i] = new Peg(3 - i / 4, i % 4);
+            pegArray[i] = new Peg(this, 3 - i / 4, i % 4);
         }
     }
 
