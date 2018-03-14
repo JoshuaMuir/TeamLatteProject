@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.unbc.cpsc.score4.enums;
+package ca.unbc.cpsc.latte;
 
 /**
  *
