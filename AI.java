@@ -16,8 +16,6 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     private int turnCount;
     
     private Board board;
-    private Peg[] pegs;
-    private Bead[] beads;
     
     private Loc3d lastmove;
     private static int numWins = 0;
@@ -153,26 +151,15 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     
     private Loc3d randomPlay() {
         //method chooses a peg location at random
-        Loc3d move = new Loc3d(0,0,0);
         Random random = new Random();
-        boolean isLegal = false;
         
-        while(!isLegal) {
-            int randomIndex = random.nextInt(4);
+        int randomIndex = random.nextInt(4);
             
-            int row = board.getPeg(randomIndex).getRow();
-            int col = board.getPeg(randomIndex).getColumn();
-            int height = board.getPeg(randomIndex).getLength();
+        int row = board.sz0[randomIndex].getRow();
+        int col = board.sz0[randomIndex].getColumn();
+        int height = board.sz0[randomIndex].getLength();
             
-            move = new Loc3d(row, col, height);
-            
-            if(Referee.checkMove(move)) { //if peg isn't full
-                isLegal = true;
-            }
-        }
-        //alternately, I just let the Referee do all the checking and just return whatever random location is generated
-        //this is probably what i'll do, cause I should not be calling the Referee check method at all.
-        
+        move = new Loc3d(row, col, height);
         return move;
     }
 }
