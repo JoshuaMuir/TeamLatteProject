@@ -1,37 +1,37 @@
 package ca.unbc.cpsc.latte;
 
+import ca.unbc.cpsc.score4.exceptions.PlayerException;
+import ca.unbc.cpsc.score4.enums.GameOverStatus;
+import ca.unbc.cpsc.score4.interfaces.*;
+
 public class TempMain {
-    //start of game
-    //new board();
 
-    //we are given a move that the a player has made and need to put it on the board
-    //new bead b(color, location, board.getPeg(location).getLength());
-    //board.getPeg(location).addbead(0,b); , where 0 is unimportant
-    //board.addtoLines(b);
-    //done
-    
-    //referee is requesting a move; now what?
-    //ai chooses location and gives to referee
-    
-    //reset by getting a new board
-    
-    /* 
-    To do:
-    bead - color turn counter problem, color stuff
-    line - return game over somehow, and request different move
-    
-    */
-    /**
-     *
-     *
-     */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PlayerException {
+        AI myAI = new AI();
         
-        Board myBoard = new Board();
-        
-        Bead b = new Bead(Colour c, player.getLocation, board.getPeg(player.getLocation()).getLength)
-        board.getPeg(player.getLocation()).addbead(0,b);
-        board.addtoLines(b);
+        NotGraphics ng = new NotGraphics();
+        ng.runGUI();
+        while(ng.getPlayerColour() == null){
+        //waiting for player to choose colour    
+        }
+        if(ng.getPlayerColour() == PlayerColour.w){
+            myAI.startGameAs(PlayerColour.b);
+        }else{
+            myAI.startGameAs(PlayerColour.w);
+        }
+        while(!myAI.getBoard().hasWin){
+            taketurns();
+        }
+        //wait until reset or exit
+    }
 
+    public static int lconvert(Location l) {
+        int i;
+        i = l.getColumn() * 4 + 4 - l.getRow();
+        return i;
+    }
+   
+    public static void taketurns(){
+        
     }
 }
