@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+//Jordan: I'm assuming Referee will be in the latte package, so you do not need to import other stuff in the latte package.
 import ca.unbc.cpsc.latte.Loc3d;
 import ca.unbc.cpsc.latte.Bead;
 import ca.unbc.cpsc.latte.HumanPlayer;
