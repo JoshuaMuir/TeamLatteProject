@@ -1,14 +1,14 @@
-/*
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.unbc.cpsc.latte;
+
 import ca.unbc.cpsc.latte.Loc3d;
 import ca.unbc.cpsc.latte.Bead;
-import ca.unbc.cpsc.latte.Player;
+import ca.unbc.cpsc.latte.HumanPlayer;
 import ca.unbc.cpsc.latte.AI;
+import ca.unbc.cpsc.score4.interfaces.Colour;
 /**
  *
  * @author ryans
@@ -16,11 +16,18 @@ import ca.unbc.cpsc.latte.AI;
 public class Referee {
   
     private Colour pc; 
+    private Board board;
     private Bead b;
-    
+
     public void placeBead()
     {
-    
+    //communicates with the bead to the peg
+    //isnt this the bead or player class job?
+    //checkmoves then places the bead
+    }
+    public void displayBoard()
+    {
+    //displays the board
     }
     public boolean checkMove(Location l)
     {
@@ -35,10 +42,7 @@ public class Referee {
     //notify the players who won
 
     }
-    private Colour colourAt(Bead[] b){
-//     return colourAt(b.getRow(),b.getColumn(),b.getHeight());
-    
-//    Peg p = board.getPeg(b.getRow(),b.getColumn());
+    private Colour colourAt(Bead b){
     Colour c = b.getColour();
     return c;
     }
@@ -46,102 +50,44 @@ public class Referee {
     
     public boolean hasaWin(Loc3d [] aLine)
     {
-     //checks the stuff   
-     int index =0;
-     switch (index)
-     {
-         case 0:
-             if ((colourAt(aLine[1],aLine[2],aLine[3]))==pc){return true;}
-             else if ((colourAt(aLine[4],aLine[8],aLine[12])==pc)){return true;}
-             else if (colourAt(aLine[5],aLine[10],aLine[15])==pc){return true;}
-             else {return false;}
-         case 1:
-             if ((colourAt(aLine[0],aLine[2],aLine[3]))==pc){return true;}
-             else if ((colourAt(aLine[5],aLine[9],aLine[13])==pc)){return true;}
-             else if (colourAt(aLine[5],aLine[10],aLine[15])==pc){return true;}
-             else {return false;}
-        case 2:
-             if ((colourAt(aLine[0],aLine[2],aLine[3]))==pc){return true;}
-             else if ((colourAt(aLine[5],aLine[9],aLine[13])==pc)){return true;}
-             else if (colourAt(aLine[5],aLine[10],aLine[15])==pc){return true;}
-             else {return false;}
-        case 3:
-             if ((colourAt(aLine[0],aLine[2],aLine[3]))==pc){return true;}
-             else if ((colourAt(aLine[5],aLine[9],aLine[13])==pc)){return true;}
-             else if (colourAt(aLine[5],aLine[10],aLine[15])==pc){return true;}
-             else {return false;}
-        case 4:
-             if ((colourAt(aLine[0],aLine[2],aLine[3]))==pc){return true;}
-             else if ((colourAt(aLine[5],aLine[9],aLine[13])==pc)){return true;}
-             else if (colourAt(aLine[5],aLine[10],aLine[15])==pc){return true;}
-             else {return false;}
-           case 5:
-             if ((colourAt(aLine[0],aLine[2],aLine[3]))==pc){return true;}
-             else if ((colourAt(aLine[5],aLine[9],aLine[13])==pc)){return true;}
-             else if (colourAt(aLine[5],aLine[10],aLine[15])==pc){return true;}
-             else {return false;}
-               case 6:
-             if ((colourAt(aLine[0],aLine[2],aLine[3]))==pc){return true;}
-             else if ((colourAt(aLine[5],aLine[9],aLine[13])==pc)){return true;}
-             else if (colourAt(aLine[5],aLine[10],aLine[15])==pc){return true;}
-             else {return false;}
-              case 7:
-             if ((colourAt(aLine[0],aLine[2],aLine[3]))==pc){return true;}
-             else if ((colourAt(aLine[5],aLine[9],aLine[13])==pc)){return true;}
-             else if (colourAt(aLine[5],aLine[10],aLine[15])==pc){return true;}
-             else {return false;}
-               case 8:
-             if ((colourAt(aLine[0],aLine[2],aLine[3]))==pc){return true;}
-             else if ((colourAt(aLine[5],aLine[9],aLine[13])==pc)){return true;}
-             else if (colourAt(aLine[5],aLine[10],aLine[15])==pc){return true;}
-             else {return false;}
-               case 9:
-             if ((colourAt(aLine[0],aLine[2],aLine[3]))==pc){return true;}
-             else if ((colourAt(aLine[5],aLine[9],aLine[13])==pc)){return true;}
-             else if (colourAt(aLine[5],aLine[10],aLine[15])==pc){return true;}
-             else {return false;}
-               case 10:
-             if ((colourAt(aLine[0],aLine[2],aLine[3]))==pc){return true;}
-             else if ((colourAt(aLine[5],aLine[9],aLine[13])==pc)){return true;}
-             else if (colourAt(aLine[5],aLine[10],aLine[15])==pc){return true;}
-             else {return false;}
-               case 11:
-             if ((colourAt(aLine[0],aLine[2],aLine[3]))==pc){return true;}
-             else if ((colourAt(aLine[5],aLine[9],aLine[13])==pc)){return true;}
-             else if (colourAt(aLine[5],aLine[10],aLine[15])==pc){return true;}
-             else {return false;}
-               case 12:
-             if ((colourAt(aLine[0],aLine[2],aLine[3]))==pc){return true;}
-             else if ((colourAt(aLine[5],aLine[9],aLine[13])==pc)){return true;}
-             else if (colourAt(aLine[5],aLine[10],aLine[15])==pc){return true;}
-             else {return false;}
-              
-     }
-           
+        //
+//     int index =0;
+//     switch (index)
+//     {
+//         case 0:
+//             if ((colourAt(aLine[1],aLine[2],aLine[3]))==pc){return true;}
+//             else if ((colourAt(aLine[4],aLine[8],aLine[12])==pc)){return true;}
+//             else if (colourAt(aLine[5],aLine[10],aLine[15])==pc){return true;}
+//             else {return false;}
+//     }
+//           
      return false;   
     }
 
     public Colour assignColour(Colour c)//or tracks color
     {
+        pc = c;
+      return c;
+    }
+    public void startGame()
+    {
+    
+      AI ai = new AI();
+      HumanPlayer hp = new HumanPlayer();
       if (pc == isWhite())
       {
-      HumanPlayer.reset();
-      HumanPlayer.StartGameAs(isWhite());
+      hp.reset();
+      hp.StartGameAs(isWhite());
       ai.reset();
       ai.StartGameAs(isBlack());
       
       }
       else 
       {
-      HumanPlayer.reset();
-      HumanPlayer.StartGameAs(isBlack());
+      hp.reset();
+      hp.StartGameAs(isBlack());
       ai.reset();
       ai.StartGameAs(isWhite());
       }
-    }
-    //not sure yet
-    public void startGame()
-    {
-    
     }
 }
