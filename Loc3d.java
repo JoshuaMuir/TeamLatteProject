@@ -54,4 +54,22 @@ public class Loc3d implements Location {
     public final boolean getIsKey() {
         return isKey;
     }
+    
+    public void add(){
+        Random n = new Random();
+        Boolean b = n.nextBoolean();
+        if(b){
+            if(row<3){
+                row++;
+            }else{
+                row = 0;
+            }
+        }else{
+            if(col<3){
+                col++;
+            }else{
+                col=0;
+            }
+        }
+    }
 }
