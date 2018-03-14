@@ -14,6 +14,8 @@ import ca.unbc.cpsc.score4.interfaces.Colour;
  * @author ryans
  */
 public class Referee {
+ 
+    //should probably have a private AI and Player object to ensure communication to those classes.
   
     private Colour pc; 
     private Board board;
