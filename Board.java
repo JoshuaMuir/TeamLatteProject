@@ -45,6 +45,9 @@ public class Board {
         index = (3 - l.getRow()) * 4 + l.getColumn();
         return sz0[index];
     }
+    
+    public Peg getPeg(int i){
+        return sz0[i];
 
     public void addtoLines(Bead b) {
         int x = b.getColumn();
