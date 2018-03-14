@@ -37,7 +37,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     @Override
     public void reset() throws PlayerException {
         gameOverStatus = null;
-        turnCount = 1;
+        turnCount = 0;
         board = new Board();
         board.changehasWin(false);
     }
@@ -101,20 +101,21 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
             }
         }
         else {
-            for(int i = 0; i < 16; i++) {
-                if(board.getPeg(i).getLength() == 3) { //check if there are vertical lines of 3
-                    b1 = board.getPeg(i).beadlist[0];
-                    b2 = board.getPeg(i).beadlist[1];
-                    b3 = board.getPeg(i).beadlist[2];
+            for(int i = 0; i < board.sz0[].length; i++) {
+                //loop through all pegs
+                if(board.sz0[i].getlength() == 3) { //check if there are vertical lines of 3
+                    b1 = board.sz0[i].beadlist[0];
+                    b2 = board.sz0[i].beadlist[1];
+                    b3 = sz0[i].beadlist[2];
                     
                     if(b1.getColour() == b2.getColour() && b2.getColour() == b3.getColour()) {
                         //check if 3 beads in a line are same colour
-                        row = board.getPeg(i).getRow();
-                        column = board.getPeg(i).getColumn();
-                        height = board.getPeg(i).getLength();
+                        row = board.sz0[i].getRow();
+                        column = board.sz0[i].getColumn();
+                        height = board.sz0[i].getLength();
                     
                         move = new Loc3d(row, column, height);
-                        i = 16;
+                        i = board.sz0[].length;
                         //exit loop
                     }
                 }
@@ -129,8 +130,8 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     
     @Override
     public Location retry() throws PlayerException {
-        lastmove.add();
-        return lastmove;
+        loc3D move = requestMoveLocation();
+        return move;
     }
     
     @Override
@@ -147,7 +148,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     }
     
     private boolean isFirstFour() {
-        return (turnCount < 9);
+        return (turnCount < 8);
     }
     
     private Loc3d randomPlay() {
