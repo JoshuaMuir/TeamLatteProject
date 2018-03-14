@@ -65,7 +65,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
         
         board.getPeg(ell).addBead(0, new Bead(opponentColour, ell, height));
         //add the opponents last move
-        board.getPeg(lastMove).addBead(0, new Bead(colour, lastMove, lastMove.getHeight()));
+        board.getPeg(lastmove).addBead(0, new Bead(colour, lastmove, lastmove.getHeight()));
         //add my last move
         
         turnCount += 2;
