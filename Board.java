@@ -26,12 +26,14 @@ public class Board {
 
     private void init(Line[] lineArray) {
         for (int i = 0; i < lineArray.length; i++) {
-            lineArray[i] = new Line();
+            lineArray[i] = new Line(this);
         }
     }
 
     public void changehasWin(boolean b){
         hasWin = b;
+    }
+    
     private void init(Peg[] pegArray) {
         for (int i = 0; i < pegArray.length; i++) {
             pegArray[i] = new Peg(3 - i / 4, i % 4);
