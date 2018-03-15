@@ -138,23 +138,55 @@ public class NotGraphics extends JPanel {
             public void run(){
         System.out.println(whomTurn+"!!!!!!!!!!");
        ++whomTurn;
-        if(r==0&&c==0)++peg00;
-    else if(r==1&&c==0)++peg01;
-    else if(r==2&&c==0)++peg02;
-    else if(r==3&&c==0)++peg03;
-    else if(r==0&&c==1)++peg10;
-    else if(r==1&&c==1)++peg11;
-    else if(r==2&&c==1)++peg12;
-    else if(r==3&&c==1)++peg13;
-    else if(r==0&&c==2)++peg20;
-    else if(r==1&&c==2)++peg21;
-    else if(r==2&&c==2)++peg22;
-    else if(r==3&&c==2)++peg23;
-    else if(r==0&&c==3)++peg30;
-    else if(r==1&&c==3)++peg31;
-    else if(r==2&&c==3)++peg32;
-    else if(r==3&&c==3)++peg33;
-    
+        if(r==0&&c==0){
+            setLastLoc(new Loc3d(0,0,peg00));
+            ++peg00;
+        }else if(r==1&&c==0){
+            setLastLoc(new Loc3d(1,0,peg01));
+            ++peg01;
+        }else if(r==2&&c==0){
+            setLastLoc(new Loc3d(2,0,peg02));
+            ++peg02;
+        }else if(r==3&&c==0){
+            setLastLoc(new Loc3d(3,0,peg03));
+            ++peg03;
+        }else if(r==0&&c==1){
+            setLastLoc(new Loc3d(0,1,peg10));
+            ++peg10;
+        }else if(r==1&&c==1){
+            setLastLoc(new Loc3d(1,1,peg11));
+            ++peg11;
+        }else if(r==2&&c==1){
+            setLastLoc(new Loc3d(2,1,peg12));
+            ++peg12;
+        }else if(r==3&&c==1){
+            setLastLoc(new Loc3d(3,1,peg13));
+            ++peg13;
+        }else if(r==0&&c==2){
+            setLastLoc(new Loc3d(0,2,peg20));
+            ++peg20;
+        }else if(r==1&&c==2){
+            setLastLoc(new Loc3d(1,2,peg21));
+            ++peg21;
+        }else if(r==2&&c==2){
+            setLastLoc(new Loc3d(2,2,peg22));
+            ++peg22;
+        }else if(r==3&&c==2){
+            setLastLoc(new Loc3d(3,2,peg23));
+            ++peg23;
+        }else if(r==0&&c==3){
+            setLastLoc(new Loc3d(0,3,peg30));
+            ++peg30;
+        }else if(r==1&&c==3){
+            setLastLoc(new Loc3d(1,3,peg31));
+            ++peg31;
+        }else if(r==2&&c==3){
+            setLastLoc(new Loc3d(2,3,peg32));
+            ++peg32;
+        }else if(r==3&&c==3){
+            setLastLoc(new Loc3d(3,3,peg33));
+            ++peg33;
+        }
  System.out.println("what is ehre");
   
     GameComponent hi = new GameComponent();
