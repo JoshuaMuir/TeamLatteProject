@@ -57,11 +57,12 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     
     @Override
     public void opponentPlays(Location ell) throws PlayerException {
-        int row = ell.getRow();
-        int col = ell.getColumn();
-        int height = board.getPeg(ell).getLength();
+        loc3d ell3d = (loc3d) ell;
+        int row = ell3d.getRow();
+        int col = ell3d.getColumn();
+        int height = board.getPeg(ell3d).getLength();
         
-        board.getPeg(ell).addBead(0, new Bead(opponentColour, ell, height));
+        board.getPeg(ell3d).addBead(0, new Bead(opponentColour, ell3d, height));
         //add the opponents last move
         board.getPeg(lastmove).addBead(0, new Bead(colour, lastmove, lastmove.getHeight()));
         //add my last move
@@ -70,7 +71,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     }
     
     @Override
-    public Loc3d requestMoveLocation() throws PlayerException {
+    public Location requestMoveLocation() throws PlayerException {
         Loc3d move = new Loc3d(0,0,0); //to ensure that move is initialized
         //for choosing a peg at random
         
