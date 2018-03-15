@@ -22,9 +22,6 @@ public class Referee {
 
     public void placeBead(int i,Colour c,Location ell)
     {
-        //communicates with the bead to the peg
-        //checkmoves then places the bead
-        //if checkkmove is true then place bead
         Loc3d ell3d = (Loc3d) ell;
        		if (b.getHeight()<i)
         	board.getPeg(ell3d).addBead(i, (Bead) c);
