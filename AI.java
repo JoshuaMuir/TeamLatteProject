@@ -92,8 +92,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
             else if(board.getPeg(new Loc3d(3,3,0)).getLength() == 0) {
                  move = new Loc3d(3, 3, 0);
             }
-            else if(board.getPeg(new Loc3d(0,0,0)).getLength() == 0) {
-                 move = new Loc3d(0, 0, 0);
+            else if(board.getPeg(new Loc3d(0,0,0)).getLength() == 0) {                 move = new Loc3d(0, 0, 0);
             }
             else if(board.getPeg(new Loc3d(0,3,0)).getLength() == 0) {
                  move = new Loc3d(0, 3, 0);
@@ -147,7 +146,7 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     }
     
     private boolean isFirstFour() {
-        return (turnCount < 8);
+        return (turnCount < 4);
     }
     
     private Loc3d randomPlay() {
