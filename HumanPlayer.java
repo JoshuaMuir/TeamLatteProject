@@ -20,6 +20,9 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         
     }
     
+    private Colour myColour = null;
+    private int opponentsId = -1;
+    
     @Override
     public void reset() throws PlayerException {
         /*
@@ -31,7 +34,13 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         
         yeah for our program, it's the user who calls reset. only in david's tournament director will the ref call reset i think
         in my program this method just resets all member variables and the constructor basically just calls this method
+        
+        MARCH 14, 2018
+        This is being handled by the GUI right now.
         */
+        
+        this.myColour = null;
+        this.opponentsId = -1;
     }
     
     @Override
@@ -45,6 +54,9 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         
         yes, the player chooses their own colour
         */
+        
+        this.myColour = c;
+        
     }    
     
     @Override
@@ -56,6 +68,9 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         
         yeah i don't think we need this really
         */
+        
+        this.opponentsId = id;
+        
     }
     
     @Override
@@ -65,6 +80,10 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         so, updating the game board after a move.
         communicate back to the GUI about the game-state,
         the game might be over after that move.
+        
+        MARCH 14, 2018
+        The GUI already contains game-state. 
+        This method isn't useful right now.
         */
     }
     
@@ -78,8 +97,12 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         
         loc3d is our class that implements Location interface, which we are allowed to use.
         
-        oh. ok. :)
+        MARCH 14, 2018
+        I can't really do anything with this method.
+        Currently, there is no method in the GUI that I can call that is going to
+        return that location to me.
         */
+
     }
     
     @Override
@@ -102,6 +125,10 @@ public class HumanPlayer implements ca.unbc.cpsc.score4.interfaces.Player {
         /*
         pop-up message on GUI indicating game-over
         happens after referee sends this info.
+        
+        MARCH 14, 2018
+        Also can't do this method because there isn't anything
+        that I can call from the GUI.
         */
     }
     
