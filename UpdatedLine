@@ -1,0 +1,56 @@
+package ca.unbc.cpsc.latte;
+
+public class Line {
+
+    protected int length = 0;
+    protected Bead[] beadlist = new Bead[4];
+    //beadlist[0] is at lowest possible height, col, row
+    //goes, left to right, bottom to top, smallest row position to largest
+    private Board board;
+    private int vitalIndex = -1;//added
+    private int blackcount = 0;
+    private int whitecount = 0;
+
+    public Line(Board b) {
+        board = b;
+    }
+
+    public int getVitalIndex() {
+        return vitalIndex;
+    }
+
+    public void addBead(int i, Bead b) {//i is from 0 to 3
+        if (this.length < 4) {
+            beadlist[i] = b;
+            length++;
+            if (b.getColour().isBlack()) {
+                blackcount++;
+            } else {
+                whitecount++;
+            }
+            if (length == 3) {//added
+                if (blackcount == 3 || whitecount == 3) {
+                    for (int temp = 0; temp < 4; temp++) {
+                        if (beadlist[temp] == null) {
+                            vitalIndex = temp;
+                        }
+                        board.setIsVital();
+                        board.setVitalMove(new Loc3d(b.getRow(),b.getColumn(),
+                                b.getHeight()));
+                    }
+                }
+            }else if (length == 4) {
+                if (blackcount == 4 || whitecount == 4) {
+                    board.changehasWin(true);
+                }
+            }
+        } else {
+            //request different move
+        }
+
+    }
+
+    public final int getLength() {
+        return length;
+    }
+}
