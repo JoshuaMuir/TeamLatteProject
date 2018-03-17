@@ -1,0 +1,315 @@
+package ca.unbc.cpsc.latte;
+
+import ca.unbc.cpsc.score4.enums.GameOverStatus;
+import ca.unbc.cpsc.score4.interfaces.Colour;
+import ca.unbc.cpsc.score4.interfaces.Location;
+import ca.unbc.cpsc.score4.exceptions.PlayerException;
+import java.util.Random;
+
+public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
+    private Colour colour;
+    private Colour opponentColour;
+    
+    private GameOverStatus gameOverStatus;
+    
+    private int opponent;
+    private int turnCount;
+    
+    private Board board;
+    
+    private Loc3d lastmove;
+    private static int numWins = 0;
+    
+    private int emptyIndex; //added
+    
+    public AI() throws PlayerException{
+        reset();
+    }
+    
+    public Board getBoard(){
+        return board;
+    }
+    
+    public Colour getColour(){
+        return colour;
+}
+    
+    @Override
+    public void reset() throws PlayerException {
+        gameOverStatus = null;
+        turnCount = 0;
+        board = new Board();
+        board.changehasWin(false);
+    }
+    
+    @Override
+    public void startGameAs(Colour c) throws PlayerException {
+        colour = c;
+        
+        if(c = PlayerColour.isWhite())
+            opponentColour = PlayerColour.isBlack();
+        else
+            opponentColour = PlayerColour.isWhite();
+    }
+    
+    @Override
+    public void noteOpponentsId(int id) throws PlayerException {
+        opponent = id;
+    }
+    
+    @Override
+    public void opponentPlays(Location ell) throws PlayerException {
+        loc3d ell3d = (loc3d) ell;
+        int row = ell3d.getRow();
+        int col = ell3d.getColumn();
+        int height = board.getPeg(ell3d).getLength();
+        
+        board.getPeg(ell3d).addBead(0, new Bead(opponentColour, ell3d, height));
+        //add the opponents last move
+        board.getPeg(lastmove).addBead(0, new Bead(colour, lastmove, lastmove.getHeight()));
+        //add my last move
+        
+        turnCount += 2;
+    }
+    
+    private loc3d playVertical() { //added
+        loc3d move;
+        
+        //alternately this could all be condensed to
+        /*
+        if(board.getIsVital) {
+            return board.getVitalMove();
+        }
+        else
+            return playHorizontal();
+        
+        should probably just try that first and see if jordan's method works
+        */
+        
+        for(int i = 0; i < board.sz0[].length; i++) {
+                //loop through all pegs
+                if(board.sz0[i].getlength() == 3) { //check if there are vertical lines of 3
+                    b1 = board.sz0[i].beadlist[0]; //bottom bead
+                    b2 = board.sz0[i].beadlist[1]; //middle bead
+                    b3 = sz0[i].beadlist[2]; //top bead
+                    
+                    if(b1.getColour() == b2.getColour() && b2.getColour() == b3.getColour()) {
+                        //check if 3 beads in a line are same colour
+                        row = board.sz0[i].getRow();
+                        column = board.sz0[i].getColumn();
+                        height = board.sz0[i].getLength();
+                    
+                        move = new Loc3d(row, column, height);
+                        return move;
+                        //i = board.sz0[].length;
+                        //exit loop
+                    }
+                }
+                else
+                    move = playHorizontal(); //go to next check method
+                    return move;
+            }
+    }
+    
+    private loc3d playHorizontal() { //added
+        Peg p1, p2, p3, p4;
+        loc3d move;
+        boolean foundMove = false;
+        
+        for(int i = 0; i < 13; i += 4) {
+            p1 = board.sz0[i];
+            p2 = board.sz0[i+1];
+            p3 = board.sz0[i+2];
+            p4 = board.sz0[i+3];
+            //loop through whole board
+            
+            for(int j = 0, j < 4, j++) {
+            //loop through all heights
+            
+                if(checkLine(p1, p2, p3, p4, j)) {
+                    int row = board.sz0[emptyIndex].getRow();
+                    int col = board.sz0[emptyIndex].getColumn();
+                    int hei = board.sz0[emptyIndex].getLength();
+                    
+                    move = new loc3d(row, col, hei);
+                    foundMove = true;
+                    j = 4; //exit inner loop
+                    i = 13; //exit outer loop
+                }
+            }
+        }
+        if(foundmove)
+            return move;
+        else
+            move = playHorizontal2();
+        return move;
+    }
+    
+    private loc3d playhorizontal2() {
+        Peg p1, p2, p3, p4;
+        loc3d move;
+        boolean foundMove = false;
+        
+        for(int i = 0; i < 4; i++) {
+            p1 = board.sz0[i];
+            p2 = board.sz0[i+4];
+            p3 = board.sz0[i+8];
+            p4 = board.sz0[i+12]
+            //loop through whole board
+            
+            for(int j = 0; j < 4; j++) {
+            //loop through all heights
+            
+                if(checkLine(p1, p2, p3, p4, j)) {
+                    int row = board.sz0[emptyIndex].getRow();
+                    int col = board.sz0[emptyIndex].getColumn();
+                    int hei = board.sz0[emptyIndex].getLength();
+                    
+                    move = new loc3d(row, col, hei);
+                    foundMove = true;
+                    j = 4;
+                    i = 4;
+                }
+            }
+        }
+        if(foundmove)
+            return move;
+        else
+            move = playDiagonal();
+        return move;
+    }
+    
+    private loc3d playDiagonal() {
+        Peg p1, p2, p3, p4;
+        loc3d move;
+        boolean foundMove = false;
+        
+        p1 = board.sz0[0];
+        p2 = board.sz0[5];
+        p3 = board.sz0[10];
+        p4 = board.sz0[15];
+        
+        for(int i = 0; i < 4; i++) {
+            if(checkLine(p1, p2, p3, p4, i)) {
+                int row = board.sz0[emptyIndex].getRow();
+                int col = board.sz0[emptyIndex].getColumn();
+                int hei = board.sz0[emptyIndex].getLength();
+                    
+                move = new loc3d(row, col, hei);
+                foundMove = true;
+                i = 4;
+            }
+        }
+        if(foundMove)
+            return move;
+        else
+            return randomPlay();
+    }
+    
+    private boolean checkLine(Peg p1, Peg p2, Peg p3, Peg p4, int i) { //added
+        boolean empty;
+        int beadCounter;
+        
+        if (p1.getLength() == i)
+            beadCounter++;
+        else if (p1.getLength() == i-1) {
+            empty = true;
+            emptyIndex = 1;
+        }
+                
+        if (p2.getLength() == i)
+            beadCounter++;
+        else if (p2.getLength() == i-1) {
+            empty = true;
+            emptyIndex = 2;
+        }
+               
+        if (p3.getLength() == i)
+            beadCounter++;
+        else if (p3.getLength() == i-1) {
+            empty = true;
+            emptyIndex = 3;
+        }
+                
+        if (p4.getLength() == i)
+            beadCounter++;
+        else if (p4.getLength() == i-1) {
+            empty = true;
+            emptyIndex = 4;
+        }
+        
+        return (beadCounter == 3 && empty == true);
+    }
+    
+    @Override
+    public Location requestMoveLocation() throws PlayerException {
+        Loc3d move = new Loc3d(0,0,0); //to ensure that move is initialized
+        //for choosing a peg at random
+        
+        int row;
+        int column;
+        int height;
+        
+        //for checking vertical lines of 3
+        
+        Bead b1;
+        Bead b2;
+        Bead b3;
+        
+        if(isFirstFour()) { //try to get a corner peg
+            if(board.getPeg(new Loc3d(3,0,0)).getLength() == 0) {
+                 move = new Loc3d(3, 0, 0);
+            }
+            else if(board.getPeg(new Loc3d(3,3,0)).getLength() == 0) {
+                 move = new Loc3d(3, 3, 0);
+            }
+            else if(board.getPeg(new Loc3d(0,0,0)).getLength() == 0) {                 move = new Loc3d(0, 0, 0);
+            }
+            else if(board.getPeg(new Loc3d(0,3,0)).getLength() == 0) {
+                 move = new Loc3d(0, 3, 0);
+            }
+        }
+        else 
+            move = playVertical();
+        
+        lastmove = move;
+        return move;
+    }
+    
+    @Override
+    public Location retry() throws PlayerException {
+        loc3D move = requestMoveLocation();
+        return move;
+    }
+    
+    @Override
+    public void noteGameOver(GameOverStatus whatHappened) throws PlayerException {
+        gameOverStatus = whatHappened;
+        
+        if(gameOverStatus == GameOverStatus.WIN)
+            numWins++;
+    }
+    
+    public int getNumWins() {
+        //returns the amount of times AI has ever won a game
+        return numWins;
+    }
+    
+    private boolean isFirstFour() {
+        return (turnCount < 4);
+    }
+    
+    private Loc3d randomPlay() {
+        //method chooses a peg location at random
+        Random random = new Random();
+        
+        int randomIndex = random.nextInt(4);
+            
+        int row = board.sz0[randomIndex].getRow();
+        int col = board.sz0[randomIndex].getColumn();
+        int height = board.sz0[randomIndex].getLength();
+            
+        move = new Loc3d(row, col, height);
+        return move;
+    }
+}
