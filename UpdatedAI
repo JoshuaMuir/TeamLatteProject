@@ -207,38 +207,70 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
     }
     
     private boolean checkLine(Peg p1, Peg p2, Peg p3, Peg p4, int i) { //added
-        boolean empty;
-        int beadCounter;
+        boolean empty = false;
+        int beadCount = 0;
+        int blackCount = 0;
+        int whiteCount = 0;
         
-        if (p1.getLength() == i)
-            beadCounter++;
-        else if (p1.getLength() == i-1) {
+        boolean oneEmpty = false;
+        boolean twoEmpty = false;
+        boolean threeEmpty = false;
+        boolean fourEmpty = false;
+        
+        Bead b1 = p1.beadlist[i];
+        Bead b2 = p2.beadlist[i];
+        Bead b3 = p2.beadlist[i];
+        Bead b4 = p2.beadlist[i];
+        
+        if(p1.getLength() == i-1) {
             empty = true;
-            emptyIndex = 1;
+            oneEmpty = true;
         }
-                
-        if (p2.getLength() == i)
-            beadCounter++;
-        else if (p2.getLength() == i-1) {
-            empty = true;
-            emptyIndex = 2;
-        }
-               
-        if (p3.getLength() == i)
-            beadCounter++;
-        else if (p3.getLength() == i-1) {
-            empty = true;
-            emptyIndex = 3;
-        }
-                
-        if (p4.getLength() == i)
-            beadCounter++;
-        else if (p4.getLength() == i-1) {
-            empty = true;
-            emptyIndex = 4;
+        else if (p1.getLength() >= i) {
+            beadCount++;
+            if(b1.isWhite())
+                whiteCount++;
+            else
+                blackCount++;
         }
         
-        return (beadCounter == 3 && empty == true);
+        if(p2.getLength() == i-1) {
+            empty = true;
+            twoEmpty = true;
+        }
+        else if(p2.getLength() >= i) {
+            beadCount++;
+            if(b2.isWhite())
+                whiteCount++;
+            else
+                blackCount++;
+        }
+        
+        if(p3.getLength() == i-1) {
+            empty = true;
+            twoEmpty = true;
+        }
+        else if(p3.getLength() >= i) {
+            beadCount++;
+            if(b3.isWhite())
+                whiteCount++;
+            else
+                blackCount++;
+        }
+        
+        if(p4.getLength() == i-1) {
+            empty = true;
+            twoEmpty = true;
+        }
+        else if(p4.getLength() >= i) {
+            beadCount++;
+            if(b4.isWhite())
+                whiteCount++;
+            else
+                blackCount++;
+        }
+        
+        return ((whiteCount == 3 || blackCount == 3) && empty);
     }
     
     @Override
@@ -263,7 +295,8 @@ public class AI implements ca.unbc.cpsc.score4.interfaces.Player {
             else if(board.getPeg(new Loc3d(3,3,0)).getLength() == 0) {
                  move = new Loc3d(3, 3, 0);
             }
-            else if(board.getPeg(new Loc3d(0,0,0)).getLength() == 0) {                 move = new Loc3d(0, 0, 0);
+            else if(board.getPeg(new Loc3d(0,0,0)).getLength() == 0) {                 
+                 move = new Loc3d(0, 0, 0);
             }
             else if(board.getPeg(new Loc3d(0,3,0)).getLength() == 0) {
                  move = new Loc3d(0, 3, 0);
