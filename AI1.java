@@ -118,15 +118,6 @@ public class AI1 implements Player {
         lastmove = move;
         Bead b = new Bead(colour,lastmove,lastmove.getHeight());
              board.getPeg(lastmove).addBead(0, b);
-             if(board.gethasWin()){
-                System.out.println("peg");
-                    if(board.whowon){
-                        joey.whomstdveWon(PlayerColour.w);
-                    }else{
-                        joey.whomstdveWon(PlayerColour.b);
-                    }
-                    
-                }
        
          board.addtoLines(b);
         

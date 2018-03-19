@@ -31,13 +31,10 @@ public class Line {
                     == beadlist[1].isBlack()
                     && beadlist[1].isBlack() == beadlist[2].isBlack()
                     && beadlist[2].isBlack() == beadlist[3].isBlack()) {
-                board.changehasWin(true);
                 
                 if (beadlist[0].isBlack()) {
-                    board.whowon = false;
                     joey.whomstdveWon(PlayerColour.b);
                 } else {
-                    board.whowon = true;
                     joey.whomstdveWon(PlayerColour.w);
                 }
 
