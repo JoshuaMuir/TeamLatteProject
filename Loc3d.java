@@ -21,6 +21,7 @@ public class Loc3d implements Location {
         col = c;
         height = h;
         setIsKey();
+        //System.out.println("so we got in here");
     }
 
     @Override
@@ -39,11 +40,11 @@ public class Loc3d implements Location {
 
     private final void setIsKey() {
         if (row == col || col == height || height == row) {
-            if (row == 2 || row == 3 && col == 2 || col == 3
-                    && height == 2 || height == 3) {
+            if (row == 2 || row == 1 && col == 2 || col == 1
+                    && height == 2 || height == 1) {
                 isKey = true;
-            } else if (row == 0 || row == 4 && col == 0 || col == 4
-                    && height == 0 || height == 4) {
+            } else if (row == 0 || row == 3 && col == 0 || col == 3
+                    && height == 0 || height == 3) {
                 isKey = true;
             } else {
                 isKey = false;
@@ -53,23 +54,5 @@ public class Loc3d implements Location {
 
     public final boolean getIsKey() {
         return isKey;
-    }
-    
-    public void add(){
-        Random n = new Random();
-        Boolean b = n.nextBoolean();
-        if(b){
-            if(row<3){
-                row++;
-            }else{
-                row = 0;
-            }
-        }else{
-            if(col<3){
-                col++;
-            }else{
-                col=0;
-            }
-        }
     }
 }

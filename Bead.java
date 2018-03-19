@@ -14,11 +14,11 @@ import ca.unbc.cpsc.score4.interfaces.Colour;
 //doubles occur if a bead is at the same location on three straights
 public class Bead{
 
-    private final Colour c;
+    private final PlayerColour c;
     private final Loc3d l;
     
 
-    public Bead(Colour co, Location argL, int h) {
+    public Bead(PlayerColour co, Location argL, int h) {
         c = co;
         l = new Loc3d(argL.getRow(), argL.getColumn(),h);
     }
@@ -46,6 +46,11 @@ public class Bead{
     }
     
     public boolean isBlack(){
-        return (c.isBlack());
+
+       return c==PlayerColour.b;
+        /*c.isBlack();
+        System.out.println("We are after isBlack now12423452345234");
+        return (c.isBlack());*/
+        
     }
 }

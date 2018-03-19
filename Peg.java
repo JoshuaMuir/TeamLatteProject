@@ -13,8 +13,8 @@ public class Peg extends Line{
     column  0   1   2   3
     */
 
-    public Peg(Board b, int r, int c) {
-        super(b);
+    public Peg(int r, int c) {
+        super(AI1.board);
         myRow = r;
         myCol = c;
     }
@@ -29,7 +29,9 @@ public class Peg extends Line{
     @Override
     public void addBead(int i, Bead b) {//i is not used for anything here
         //but it is necessary for the line object which it extends
-        super.addBead(length, b);
+        super.addBead(i, b);
+        
+        
 
     }
 

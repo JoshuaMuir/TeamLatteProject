@@ -5,8 +5,7 @@
  */
 package ca.unbc.cpsc.latte;
 
-import ca.unbc.cpsc.score4.interfaces.Colour;
-import ca.unbc.cpsc.score4.enums.wb;
+import ca.unbc.cpsc.score4.interfaces.*;
 
 /**
  *
@@ -18,7 +17,7 @@ public class PlayerColour implements Colour {
     public static final PlayerColour b = new PlayerColour(false);
     private wb c;
 
-    private PlayerColour(boolean b) {
+    public PlayerColour(boolean b) {
         if (b) {
             c = wb.WHITE;
         } else {

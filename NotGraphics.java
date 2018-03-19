@@ -1,4 +1,4 @@
-package ca.unbc.cpsc.score4.interfaces;
+package ca.unbc.cpsc.latte;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -9,27 +9,35 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import sun.audio.*;
 import javax.swing.*;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+import java.io.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.util.Timer;
-import java.util.ArrayList;
-import ca.unbc.cpsc.latte.*;
-import ca.unbc.cpsc.score4.exceptions.PlayerException;
 import java.util.TimerTask;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 public class NotGraphics extends JPanel {
 
-    public BufferedImage image;
+    /*
+    The mainFrame.setSize(1000,900); statements
+    that appear to be littered throughout the 
+    program appear because we were having trouble
+    updating the display at the correct time,
+    repaint(), for example did not work, setSize
+    method does work.
+     */
     public static JFrame mainFrame;
-    private static JLabel jooble;
-    private static JLabel bottomLabel;
-    private static Referee joey=new Referee();
+    public static JLabel bottomLabel;
+    public static Referee1 joey;
+    /*
+    The following variables are counters that cause 
+    beads to be displayed on the board, the naming
+    convention is peg(row)(column).
+     */
     public static int peg00 = 0;
     public static int peg01 = 0;
     public static int peg02 = 0;
@@ -38,6 +46,7 @@ public class NotGraphics extends JPanel {
     public static int peg11 = 0;
     public static int peg12 = 0;
     public static int peg13 = 0;
+    public static Clip clip;
     public static int peg20 = 0;
     public static int peg21 = 0;
     public static int peg22 = 0;
@@ -47,316 +56,341 @@ public class NotGraphics extends JPanel {
     public static int peg32 = 0;
     public static int peg33 = 0;
     public static int whomTurn = 0;
-    public static int a = 0;
-    public static int c = 0;
-    public static int b = 0;
-  //  private static final Object lock;
-    private static Loc3d lastLoc;
-    private static PlayerColour pc;
-    public static boolean myTurn = true;
+    public static int counterBlack = 0;
+    public static int counterWhite = 0;
+    public static int GameOver = 0;
 
     public NotGraphics() {
-        try {
-            image = ImageIO.read(new File("/home/jmuir/Downloads"));
-
-        } catch (IOException ex) {
-
-        }
-
-    }
-    private static void setLastLoc(Loc3d l){
-        lastLoc = l;
-    }
-    
-    public static Loc3d getLastLoc(){
-        return lastLoc;
-    }
-    
-    private static void setPlayerColour(boolean b){
-        if (b){
-            pc = PlayerColour.w;
-        }else{
-            pc = PlayerColour.b;
-        }
-    }
-    
-    public static PlayerColour getPlayerColour(){
-        return pc;
+        joey = new Referee1();
     }
 
-    public static void main(String[] args) {
-//JLabel jooble=new JLabel("This one");
-        runGUI();
-    }
-    public static void satSome(){
-    
-        final Runnable doHelloWorld = new Runnable() {
-             public void run() {
-                 mainFrame.setSize(1001,900);
-                 mainFrame.setSize(1000,900);
-                 
-             }
-         };
-        Thread appThread = new Thread() {
-             public void run() {
-                 try {
-                     SwingUtilities.invokeAndWait(doHelloWorld);
-                     System.out.println("when does this");
-                     mainFrame.setSize(1001,900);
-                     mainFrame.setSize(1000,900);
-                 }
-                 catch (Exception e) {
-                     e.printStackTrace();
-                 }
-                // --whomTurn;
-                 System.out.println("Finished on " + Thread.currentThread());
-             }
-         };
-         appThread.start();
+    public static void showEndGame() {
+
+        bottomLabel.setText("YOU ARE A WINNER MF");
+        ++GameOver;
         mainFrame.setSize(1001,900);
         mainFrame.setSize(1000,900);
-        //++whomTurn;
-    
     }
-    public static void timerThing(int r, int h, int c){
-    
-    Timer tim=new Timer();
-    bottomLabel.setText("AI is thinking...");
-    tim.schedule(new TimerTask(){
-    public void run(){
-    bottomLabel.setText("Click a peg!");
-        whatIs(r,h,c);
-    
-    }
-    
-    }, 2000);
-    
-    }
-    public static void whatIs(int r, int c, int h){
-        
-        Thread dogThread=new Thread(){
-            public void run(){
-        System.out.println(whomTurn+"!!!!!!!!!!");
-       ++whomTurn;
-        if(r==0&&c==0){
-            setLastLoc(new Loc3d(0,0,peg00));
-            ++peg00;
-        }else if(r==1&&c==0){
-            setLastLoc(new Loc3d(1,0,peg01));
-            ++peg01;
-        }else if(r==2&&c==0){
-            setLastLoc(new Loc3d(2,0,peg02));
-            ++peg02;
-        }else if(r==3&&c==0){
-            setLastLoc(new Loc3d(3,0,peg03));
-            ++peg03;
-        }else if(r==0&&c==1){
-            setLastLoc(new Loc3d(0,1,peg10));
-            ++peg10;
-        }else if(r==1&&c==1){
-            setLastLoc(new Loc3d(1,1,peg11));
-            ++peg11;
-        }else if(r==2&&c==1){
-            setLastLoc(new Loc3d(2,1,peg12));
-            ++peg12;
-        }else if(r==3&&c==1){
-            setLastLoc(new Loc3d(3,1,peg13));
-            ++peg13;
-        }else if(r==0&&c==2){
-            setLastLoc(new Loc3d(0,2,peg20));
-            ++peg20;
-        }else if(r==1&&c==2){
-            setLastLoc(new Loc3d(1,2,peg21));
-            ++peg21;
-        }else if(r==2&&c==2){
-            setLastLoc(new Loc3d(2,2,peg22));
-            ++peg22;
-        }else if(r==3&&c==2){
-            setLastLoc(new Loc3d(3,2,peg23));
-            ++peg23;
-        }else if(r==0&&c==3){
-            setLastLoc(new Loc3d(0,3,peg30));
-            ++peg30;
-        }else if(r==1&&c==3){
-            setLastLoc(new Loc3d(1,3,peg31));
-            ++peg31;
-        }else if(r==2&&c==3){
-            setLastLoc(new Loc3d(2,3,peg32));
-            ++peg32;
-        }else if(r==3&&c==3){
-            setLastLoc(new Loc3d(3,3,peg33));
-            ++peg33;
-        }
- System.out.println("what is ehre");
-  
-    GameComponent hi = new GameComponent();
+
+//    public static void main(String[] args) {
+////JLabel jooble=new JLabel("This one");
+//        runGUI();
+//    }
+    public static void delay() {
+
+        final Runnable doHelloWorld = () -> {
+            mainFrame.setSize(1001, 900);
+            mainFrame.setSize(1000, 900);
+        };
+        Thread appThread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    SwingUtilities.invokeAndWait(doHelloWorld);
+
                     mainFrame.setSize(1001, 900);
                     mainFrame.setSize(1000, 900);
-                  satSome();
-                    System.out.println("im sure");
-                    //++whomTurn;
-                    System.out.println("peg00 is" + peg00);
-                    System.out.println("peg01 is" + peg01);
-                      mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
-                      mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
-                      mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
-                      mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1200, 900);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                System.out.println("Finished on " + Thread.currentThread());
+
             }
         };
+
+        appThread.start();
+        mainFrame.setSize(1001, 900);
+        mainFrame.setSize(1000, 900);
+
+        //++whomTurn;
+    }
+
+    public static void timer(int r, int h, int c) {
+        if (Referee1.whoWon != 2) {
+            Timer tim = new Timer();
+            bottomLabel.setText("AI is thinking...");
+            tim.schedule(new TimerTask() {
+                public void run() {
+                    bottomLabel.setText("Click a peg!");
+
+                    aiPlays(r, h, c);
+
+                }
+
+            }, 100);
+        } else;
+    }
+
+    public static void aiPlays(int r, int c, int h) {
+
+        Thread dogThread = new Thread() {
+            public void run() {
+
+                ++whomTurn;
+
+                if (r == 0 && c == 0) {
+                    ++peg00;
+                } else if (r == 1 && c == 0) {
+                    ++peg01;
+                } else if (r == 2 && c == 0) {
+                    ++peg02;
+                } else if (r == 3 && c == 0) {
+                    ++peg03;
+                } else if (r == 0 && c == 1) {
+                    ++peg10;
+                } else if (r == 1 && c == 1) {
+                    ++peg11;
+                } else if (r == 2 && c == 1) {
+                    ++peg12;
+                } else if (r == 3 && c == 1) {
+                    ++peg13;
+                } else if (r == 0 && c == 2) {
+                    ++peg20;
+                } else if (r == 1 && c == 2) {
+                    ++peg21;
+                } else if (r == 2 && c == 2) {
+                    ++peg22;
+                } else if (r == 3 && c == 2) {
+                    ++peg23;
+                } else if (r == 0 && c == 3) {
+                    ++peg30;
+                } else if (r == 1 && c == 3) {
+                    ++peg31;
+                } else if (r == 2 && c == 3) {
+                    ++peg32;
+                } else if (r == 3 && c == 3) {
+                    ++peg33;
+                } else;
+
+                // 
+                mainFrame.setSize(1001, 900);
+                mainFrame.setSize(1000, 900);
+
+                delay();
+
+                mainFrame.setSize(1001, 900);
+                mainFrame.setSize(1000, 900);
+
+            }
+
+        };
+
         SwingUtilities.invokeLater(dogThread);
-        
-      
-    
+
+    }
+
+    public static void resetGame() {
+        //Resets the game so that it may be played again.
+
+        peg00 = 0;
+        peg01 = 0;
+        peg02 = 0;
+        peg03 = 0;
+        peg10 = 0;
+        peg11 = 0;
+        peg12 = 0;
+        peg13 = 0;
+        peg20 = 0;
+        peg21 = 0;
+        peg22 = 0;
+        peg23 = 0;
+        peg30 = 0;
+        peg31 = 0;
+        peg32 = 0;
+        peg33 = 0;
+        counterBlack = 0;
+        counterWhite = 0;
+        GameComponent.whey = 0;
+        whomTurn = 0;
+        bottomLabel.setText("Aye man how ");
+        joey = new Referee1();
+
+    }
+
+    public static void startSound() throws IOException {
+  
+        try {
+
+            clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(new File("dial-up-modem-2.wav")));
+            clip.start();
+            // clip.stop();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void playSound() {
+        java.util.Random randNum = new java.util.Random();
+        int i = randNum.nextInt(2);
+        try {
+            if (Referee1.whoWon == 0) {
+                if (i == 1) {
+                    clip = AudioSystem.getClip();
                     
+                    clip.open(AudioSystem.getAudioInputStream(new File("shoryuryu.wav")));
+
+                } else {
+                    clip = AudioSystem.getClip();
+                    
+                    clip.open(AudioSystem.getAudioInputStream(new File("hadouryu.wav")));
+
+                }
+
+                clip.flush();
+                clip.start();
+                clip.flush();
+                clip.start();
+                if (!clip.isActive()) {
+
+                    clip.start();
+                    clip.flush();
+                } else;
+            } else;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
-    public static void whoIs(int r, int h, int c){
-//    Thread godThread=new Thread(){
-//        public void Run(){
-        System.out.println(whomTurn+"!!!!!!!!!!"); //GameComponent hi = new GameComponent();
-      // ++whomTurn;
-        if(r==0)++peg00;
-    else if(r==1)++peg01;
-    else if(r>=2)++peg02;else;
-    
- 
-  System.out.println("now it is invoked");
-   
-                  
-                    System.out.println("peg00 is" + peg00);
-                    System.out.println("peg01 is" + peg01);
-                      //GameComponent hi = new GameComponent();
-//                
-//        }
-//    };SwingUtilities.invokeLater(godThread);
-//    
-//    try{
-//    SwingUtilities.invokeAndWait(godThread);}catch(Exception e){
-//    System.out.println("got him");}
-    
+
+    public static void fight() {
+
+        try {
+            clip.stop();
+            Clip flip = AudioSystem.getClip();
+            flip.open(AudioSystem.getAudioInputStream(new File("fight.wav")));
+            flip.start();
+        } catch (Exception t) {
+            t.printStackTrace();
+        }
+
     }
-    private static void runGUI() {
-        PlayerColour grood=new PlayerColour(true);
-        PlayerColour brood=new PlayerColour(false);
-        HumanPlayer joshuaman=new HumanPlayer();
-       // joshuaman.startGameAs(grood);
-        //Board bird = new Board();
+
+    public static void sound() throws IOException {
+       
+        AudioPlayer MGP = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData MD;
+        ContinuousAudioDataStream loop = null;
+        try {
+            BGM = new AudioStream(new FileInputStream("hadouryu.wav"));
+
+            MD = BGM.getData();
+            loop = new ContinuousAudioDataStream(MD);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        MGP.stop();
+        MGP.start(loop);
+        MGP.stop();
+    }
+
+    public void runGUI() {
+        try {
+            startSound();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         GameComponent scoreGame = new GameComponent();
-//Board bird=new Board();
-         bottomLabel = new JLabel("Please Select A Color!");
-//        HumanPlayer Josh = new HumanPlayer();
+        bottomLabel = new JLabel("Please Select A Colour!");
         mainFrame = new JFrame();
-        //Player Josh=new Player();
-//        HumanPlayer joshua=new HumanPlayer();
-        // Colour old=new Colour();
         JPanel mainPanel = new JPanel();
         JPanel auxillaryPanel = new JPanel();
-        JPanel pindle = new JPanel();
-        JPanel smash = new JPanel();
-        JPanel trick = new JPanel();
+        JPanel quitPanel = new JPanel();
         Color myColor = new Color(165, 42, 42);
-        JPanel what = new JPanel();
+        JPanel buttonPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
         JButton butoon = new JButton("Place beed at 0,0");
         JButton quitButton = new JButton("QUIT");
         JButton resetButton = new JButton("  RESET  ");
         JToggleButton blackButton = new JToggleButton("BLACK");
         JToggleButton whiteButton = new JToggleButton("WHITE");
-        what.add(whiteButton);
+        buttonPanel.add(whiteButton);
         bottomLabel.setFont(new Font("Times Roman", Font.BOLD, 48));
-        //what.add(butoon); 
+        buttonPanel.add(blackButton);
+        buttonPanel.add(resetButton);
+        resetButton.addActionListener((ActionEvent ae) -> {
+            try {
+                startSound();
+            } catch (Exception g) {
+                g.printStackTrace();
+            }
+            peg00 = 0;
+            peg01 = 0;
+            peg02 = 0;
+            peg03 = 0;
+            peg10 = 0;
+            peg11 = 0;
+            peg12 = 0;
+            peg13 = 0;
+            peg20 = 0;
+            peg21 = 0;
+            peg22 = 0;
+            peg23 = 0;
+            peg30 = 0;
+            peg31 = 0;
+            peg32 = 0;
+            peg33 = 0;
+            counterBlack = 0;
+            counterWhite = 0;
+            Referee1.whoWon = 0;
+            GameOver = 0;
+            Referee1.yurd = 0;
+            joey = new Referee1();
+            blackButton.setEnabled(true);
+            whiteButton.setEnabled(true);
+            whiteButton.setSelected(false);
+            blackButton.setSelected(false);
+            bottomLabel.setText("Please Select A Colour!");
+            GameComponent.whey = 0;
+            whomTurn = 0;
 
-        what.add(blackButton);
-        what.add(resetButton);
-        resetButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-
-                peg00 = 0;
-                peg01 = 0;
-                peg02 = 0;
-                peg03 = 0;
-                peg10 = 0;
-                peg11 = 0;
-                peg12 = 0;
-                peg13 = 0;
-                peg20 = 0;
-                peg21 = 0;
-                peg22 = 0;
-                peg23 = 0;
-                peg30 = 0;
-                peg31 = 0;
-                peg32 = 0;
-                peg33 = 0;
-                a = 0;
-                c = 0;
-                b = 0;
-                blackButton.setEnabled(true);
-                whiteButton.setEnabled(true);
-                whiteButton.setSelected(false);
-                blackButton.setSelected(false);
-                GameComponent.whey = 0;
+            mainFrame.setSize(1001, 900);
+            mainFrame.setSize(1000, 900);
+            GameComponent score4Game = new GameComponent();
+        });
+        quitButton.addActionListener((ActionEvent ae) -> {
+            System.exit(0);
+        });
+        blackButton.addActionListener((ActionEvent ae) -> {
+            if (counterWhite == 1) {
+                return;
+            } else if (counterBlack == 0) {
+                counterBlack++;
                 whomTurn = 0;
-
-                mainFrame.setSize(1001, 900);
+                
                 mainFrame.setSize(1000, 900);
-                GameComponent hi = new GameComponent();
-                //runGUI();
-                //System.exit(4);
+                mainFrame.setSize(1001, 900);
+                blackButton.setEnabled(false);
+                whiteButton.setEnabled(false);
+                 
+                bottomLabel.setText("Now Click a Peg!");
+                fight();
+            } else {
+                return;
             }
-        });
-        quitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-
-                System.exit(0);
-
-            }
-
-        });
-        blackButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-                if (c == 1) {
-                    return;
-                } else if (a == 0) {
-                    a++;
-                    whomTurn = 0;
-//                    joshua.startGameAsNot("white");
-                    System.out.println("this shows that the black button is has been pressed");
-                    System.out.println("whomTurn is now" + whomTurn);
-                    mainFrame.setSize(1000, 900);
-                    mainFrame.setSize(1001, 900);
-                    blackButton.setEnabled(false);
-                    whiteButton.setEnabled(false);
-                    setPlayerColour(false);
-                    GameComponent hi = new GameComponent();
-                    bottomLabel.setText("Now Click a Peg!");
-                    //twitch.removeActionListener(this);
-                } else {
-                    return;
-                }
-
-            }
-
         });
         whiteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("whom turn is" + whomTurn);
-                if (a == 1) {
+                
+                if (counterBlack == 1) {
                     return;
-                } else if (c == 0) {
-                    c++;
+                } else if (counterWhite == 0) {
+                    counterWhite++;
                     whomTurn = 1;
                     mainFrame.setSize(1000, 900);
                     mainFrame.setSize(1001, 900);
-                    System.out.println("this shows that the white button is has been pressed");
-                    System.out.println("whomTurn is now" + whomTurn);
+              
                     whiteButton.setEnabled(false);
                     blackButton.setEnabled(false);
-                    setPlayerColour(true);
-                    GameComponent hi = new GameComponent();
+                     
                     bottomLabel.setText("Now Click a Peg!");
+                    fight();
                     // twitch2.removeActionListener(this);
                 } else {
                     return;
@@ -367,269 +401,353 @@ public class NotGraphics extends JPanel {
         //ActionListener kurt = new doActionListener();
         mainPanel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if (a == 0 && c == 0) {
+
+                try {
+
+                    if (Referee1.whoWon < 1) {
+                        playSound();
+                    } else;
+
+                } catch (Exception q) {
+                    q.printStackTrace();
+                }
+                if (counterBlack == 0 && counterWhite == 0) {
                     bottomLabel.setText("You Must Select A Color First!");
-                    System.out.println("you must select a color");
+
                     return;
                 } else {
                     bottomLabel.setText("");
                 }
-                System.out.println(e.getX() + " " + e.getY());
-                if ((e.getX() > 185 && e.getX() < 205) && e.getY() > 330 && e.getY() < 440) {
-                    //  ++peg00;
-                    // Josh.requestMoveLocation();
-                    if (peg00 <= 4) {
-                        ++whomTurn;
-                    } else;
-                    System.out.println("whomturn in this motha "+whomTurn);
-                    Loc3d good=new Loc3d(0,0,peg00);
-                    //Referee joey=new Referee();
-                    try{
-                    joey.placeBead(good);
-                   // ++whomTurn;
-                    joey.doThis();
-                    }catch(Exception c){System.out.println("got it");}
-                    GameComponent hi = new GameComponent();
-//                    mainFrame.setSize(1001, 900);
-//                    mainFrame.setSize(1000, 900);
-                    System.out.println("peg00 is" + peg00);
-                    System.out.println("peg01 is" + peg01);
-                } else if ((e.getX() > 255 && e.getX() < 275) && e.getY() > 390 && e.getY() < 482) {
-                    //++peg01;
-                    if (peg01 <= 4) {
-                        ++whomTurn;
-                    } else;
-                    Loc3d good=new Loc3d(1,0,peg01);
-                    Referee joey=new Referee();
-                    try{joey.placeBead(good);
-                    joey.doThis();}catch(Exception c){System.out.println("got em");}
-                    System.out.println("peg 00 is" + peg00);
-                    System.out.println("peg 01 is" + peg01);
-                    bottomLabel.setText("hi");
-                    GameComponent hi = new GameComponent();
-                    mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
+                if (Referee1.whoWon < 1) {
 
-                } else if ((e.getX() > 325 && e.getX() < 345) && e.getY() > 437 && e.getY() < 534) {
-                    //++peg02;
-                    if (peg02 <= 4) {
-                        ++whomTurn;
-                    } else;
-                    GameComponent hi = new GameComponent();
-                    Loc3d good=new Loc3d(2,0,peg02);
-                    //Referee joey=new Referee();
-                    try{joey.placeBead(good);
-                   // ++whomTurn;
+                    System.out.println(e.getX() + " " + e.getY());
+                    if ((e.getX() > 185 && e.getX() < 205) && e.getY() > 330 && e.getY() < 440) {
+
+                        if (peg00 < 4) {
+                            ++whomTurn;
+
+                            Loc3d good = new Loc3d(0, 0, peg00);
+
+                            try {
+
+                                joey.placeBead(good);
+
+                                joey.doThis();
+                            } catch (Exception c) {
+
+                            }
+
+                             
+
+                        }
+
+                    } else if ((e.getX() > 255 && e.getX() < 275) && e.getY() > 390 && e.getY() < 482) {
+                        //++peg01;
+                        if (peg01 < 4) {
+                            ++whomTurn;
+                            Loc3d good = new Loc3d(1, 0, peg01);
+                            // Referee1 joey=new Referee1();
+
+                            try {
+                                joey.placeBead(good);
+                                joey.doThis();
+                            } catch (Exception c) {
+                                
+                                c.printStackTrace();
+                            }
+
+             
+                            //  bottomLabel.setText("hi");
+                             
+                            mainFrame.setSize(1001, 900);
+                            mainFrame.setSize(1000, 900);
+                        }
+
+                    } else if ((e.getX() > 325 && e.getX() < 345) && e.getY() > 437 && e.getY() < 534) {
+                        //++peg02;
+                        if (peg02 < 4) {
+                            ++whomTurn;
+
+                             
+                            Loc3d good = new Loc3d(2, 0, peg02);
+                            //Referee joey=new Referee();
+                            try {
+                                joey.placeBead(good);
+                                // ++whomTurn;
+
+                                joey.doThis();
+                                joey.checkWin(good);
+                            } catch (Exception c) {
+                                
+                                c.printStackTrace();
+                            }
+                            mainFrame.setSize(1001, 900);
+                            mainFrame.setSize(1000, 900);
+
+                  
+                        }
+
+                    } else if ((e.getX() > 395 && e.getX() < 415) && e.getY() > 477 && e.getY() < 584) {
+
+                        // ++peg03;
+                        if (peg03 < 4) {
+                            ++whomTurn;
+                            Loc3d good = new Loc3d(3, 0, peg03);
+                            //Referee joey=new Referee();
+                            try {
+                                joey.placeBead(good);
+                                // ++whomTurn;
+                                joey.doThis();
+                            } catch (Exception c) {
+                                c.printStackTrace();
+                            }
+                             
+                            mainFrame.setSize(1001, 900);
+                            mainFrame.setSize(1000, 900);
+
+        
+                            
+                        }
+
+                    } else if ((e.getX() > 285 && e.getX() < 305) && e.getY() > 310 && e.getY() < 410) {
+
+                        // ++peg10;
+                        if (peg10 < 4) {
+                            ++whomTurn;
+                            Loc3d good = new Loc3d(0, 1, peg10);
+                            //Referee joey=new Referee();
+                            try {
+                                joey.placeBead(good);
+                                // ++whomTurn;
+                                joey.doThis();
+                            } catch (Exception c) {
+                                c.printStackTrace();
+                            }
+                             
+                            mainFrame.setSize(1001, 900);
+                            mainFrame.setSize(1000, 900);
+                        
+                        }
+
+                    } else if ((e.getX() > 355 && e.getX() < 375) && e.getY() > 370 && e.getY() < 450) {
+                        //++peg11;
+                        if (peg11 < 4) {
+                            ++whomTurn;
+
+                            Loc3d good = new Loc3d(1, 1, peg11);
+                            //Referee joey=new Referee();
+                            try {
+                                joey.placeBead(good);
+                                // ++whomTurn;
+                                joey.doThis();
+                            } catch (Exception c) {
+                                c.printStackTrace();
+                            }
+                             
+                            mainFrame.setSize(1001, 900);
+                            mainFrame.setSize(1000, 900);
+                 
+                        }
+
+                    } else if ((e.getX() > 420 && e.getX() < 440) && e.getY() > 410 && e.getY() < 510) {
+                        //++peg12;
+                        if (peg12 < 4) {
+                            ++whomTurn;
+
+                            Loc3d good = new Loc3d(2, 1, peg12);
+                            //Referee joey=new Referee();
+                            try {
+                                joey.placeBead(good);
+                                // ++whomTurn;
+                                joey.doThis();
+                            } catch (Exception c) {
+                                c.printStackTrace();
+                            }
+                             
+                            mainFrame.setSize(1001, 900);
+                            mainFrame.setSize(1000, 900);
+                          
+                        }
+
+                    } else if ((e.getX() > 490 && e.getX() < 510) && e.getY() > 460 && e.getY() < 560) {
+                        //++peg13;
+                        if (peg13 < 4) {
+                            ++whomTurn;
+
+                            try {
+                                Loc3d good = new Loc3d(3, 1, peg13);
+                                //Referee joey=new Referee();
+                                joey.placeBead(good);
+                                // ++whomTurn;
+                                joey.doThis();
+                            } catch (Exception c) {
+                                c.printStackTrace();
+                            }
+                             
+                            mainFrame.setSize(1001, 900);
+                            mainFrame.setSize(1000, 900);
+                            
+                        }
+
+                    } else if ((e.getX() > 385 && e.getX() < 405) && e.getY() > 300 && e.getY() < 395) {
+                        // ++peg20;
+                        if (peg20 < 4) {
+                            ++whomTurn;
+                            Loc3d good = new Loc3d(0, 2, peg20);
+                            //Referee joey=new Referee();
+                            try {
+                                joey.placeBead(good);
+                                // ++whomTurn;
+                                joey.doThis();
+                            } catch (Exception c) {
+                                c.printStackTrace();
+                            }
+                             
+                            mainFrame.setSize(1001, 900);
+                            mainFrame.setSize(1000, 900);
+                            
+                        }
+
+                    } else if ((e.getX() > 455 && e.getX() < 475) && e.getY() > 345 && e.getY() < 460) {
+                        //  ++peg21;
+                        if (peg21 < 4) {
+                            ++whomTurn;
+
+                            try {
+                                Loc3d good = new Loc3d(1, 2, peg21);
+                                //Referee joey=new Referee();
+                                joey.placeBead(good);
+                                // ++whomTurn;
+                                joey.doThis();
+                            } catch (Exception c) {
+                                c.printStackTrace();
+                            }
+                             
+                            mainFrame.setSize(1001, 900);
+                            mainFrame.setSize(1000, 900);
+                    
+                        }
+
+                    } else if ((e.getX() > 515 && e.getX() < 535) && e.getY() > 390 && e.getY() < 500) {
+                        // ++peg22;
+                        if (peg22 < 4) {
+                            ++whomTurn;
+
+                            try {
+                                Loc3d good = new Loc3d(2, 2, peg22);
+                                //Referee joey=new Referee();
+                                joey.placeBead(good);
+                                // ++whomTurn;
+                                joey.doThis();
+                            } catch (Exception c) {
+                                c.printStackTrace();
+                            }
+                             
+                            mainFrame.setSize(1001, 900);
+                            mainFrame.setSize(1000, 900);
+                       
+                        }
+
+                    } else if ((e.getX() > 575 && e.getX() < 605) && e.getY() > 430 && e.getY() < 530) {
+                        // ++peg23;
+                        if (peg23 < 4) {
+                            ++whomTurn;
+
+                            try {
+                                Loc3d good = new Loc3d(3, 2, peg23);
+                                //Referee joey=new Referee();
+                                joey.placeBead(good);
+                                // ++whomTurn;
+                                joey.doThis();
+                            } catch (Exception c) {
+                                c.printStackTrace();
+                            }
+                             
+                            mainFrame.setSize(1001, 900);
+                            mainFrame.setSize(1000, 900);
+                         
+                        }
+
+                    } else if ((e.getX() > 495 && e.getX() < 515) && e.getY() > 280 && e.getY() < 380) {
+                        //++peg30;
+                        if (peg30 < 4) {
+                            ++whomTurn;
+
+                            try {
+                                Loc3d good = new Loc3d(0, 3, peg30);
+                                //Referee joey=new Referee();
+                                joey.placeBead(good);
+                                // ++whomTurn;
+                                joey.doThis();
+                            } catch (Exception c) {
+                                c.printStackTrace();
+                            }
+                             
+                            mainFrame.setSize(1001, 900);
+                            mainFrame.setSize(1000, 900);
+                    
+                        }
+
+                    } else if ((e.getX() > 555 && e.getX() < 575) && e.getY() > 320 && e.getY() < 420) {
+                        // ++peg31;
+                        if (peg31 < 4) {
+                            ++whomTurn;
+
+                            try {
+                                Loc3d good = new Loc3d(1, 3, peg31);
+                                //Referee joey=new Referee();
+                                joey.placeBead(good);
+                                // ++whomTurn;
+                                joey.doThis();
+                            } catch (Exception c) {
+                                c.printStackTrace();
+                            }
+                             
+                            mainFrame.setSize(1001, 900);
+                            mainFrame.setSize(1000, 900);
                    
-                    joey.doThis();
-                    joey.checkWin(good);}catch(Exception c){System.out.println("caught it");}
-                    mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
+                        }
 
-                    System.out.println("peg 00 is" + peg00);
-                    System.out.println("peg 02 is" + peg02);
+                    } else if ((e.getX() > 615 && e.getX() < 635) && e.getY() > 360 && e.getY() < 460) {
+                        //++peg32;
+                        if (peg32 < 4) {
+                            ++whomTurn;
 
-                } else if ((e.getX() > 395 && e.getX() < 415) && e.getY() > 477 && e.getY() < 584) {
+                            try {
+                                Loc3d good = new Loc3d(2, 3, peg32);
+                                //Referee joey=new Referee();
+                                joey.placeBead(good);
+                                // ++whomTurn;
+                                joey.doThis();
+                            } catch (Exception c) {
+                                c.printStackTrace();
+                            }
+                             
+                            mainFrame.setSize(1001, 900);
+                            mainFrame.setSize(1000, 900);
+                      
+                        }
 
-                   // ++peg03;
-                    if (peg03 <= 4) {
-                        ++whomTurn;
-                    } else;
-                    Loc3d good=new Loc3d(3,0,peg03);
-                    //Referee joey=new Referee();
-                    try{joey.placeBead(good);
-                   // ++whomTurn;
-                    joey.doThis();}catch(Exception c){}
-                    GameComponent hi = new GameComponent();
-                    mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
+                    } else if ((e.getX() > 675 && e.getX() < 695) && e.getY() > 400 && e.getY() < 500) {
+                        //++peg33;
+                        if (peg33 < 4) {
+                            ++whomTurn;
 
-                    System.out.println("peg 00 is" + peg00);
-                    System.out.println("peg 02 is" + peg02);
-                    bottomLabel.setText("hi");
-
-                } else if ((e.getX() > 285 && e.getX() < 305) && e.getY() > 310 && e.getY() < 410) {
-
-                   // ++peg10;
-                    if (peg10 <= 4) {
-                        ++whomTurn;
+                            try {
+                                Loc3d good = new Loc3d(3, 3, peg33);
+                                //Referee joey=new Referee();
+                                joey.placeBead(good);
+                                // ++whomTurn;
+                                joey.doThis();
+                            } catch (Exception c) {
+                                c.printStackTrace();
+                            }
+                             
+                            mainFrame.setSize(1001, 900);
+                            mainFrame.setSize(1000, 900);
+                        
+                        }
                     } else;
-                    Loc3d good=new Loc3d(0,1,peg10);
-                    //Referee joey=new Referee();
-                    try{joey.placeBead(good);
-                   // ++whomTurn;
-                    joey.doThis();}catch(Exception c){}
-                    GameComponent hi = new GameComponent();
-                    mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
-                    System.out.println("peg 00 is" + peg00);
-                    System.out.println("peg 02 is" + peg02);
-
-                } else if ((e.getX() > 355 && e.getX() < 375) && e.getY() > 370 && e.getY() < 450) {
-                    //++peg11;
-                    if (peg11 <= 4) {
-                        ++whomTurn;
-                    } else;
-                    Loc3d good=new Loc3d(1,1,peg11);
-                    //Referee joey=new Referee();
-                    try{joey.placeBead(good);
-                   // ++whomTurn;
-                    joey.doThis();}catch(Exception c){}
-                    GameComponent hi = new GameComponent();
-                    mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
-                    System.out.println("peg00 is" + peg00);
-                    System.out.println("peg01 is" + peg01);
-                } else if ((e.getX() > 420 && e.getX() < 440) && e.getY() > 410 && e.getY() < 510) {
-                    //++peg12;
-                    if (peg12 <= 4) {
-                        ++whomTurn;
-                    } else;
-                    Loc3d good=new Loc3d(2,1,peg12);
-                    //Referee joey=new Referee();
-                    try{joey.placeBead(good);
-                   // ++whomTurn;
-                    joey.doThis();}catch(Exception c){}
-                    GameComponent hi = new GameComponent();
-                    mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
-                    System.out.println("peg00 is" + peg00);
-                    System.out.println("peg01 is" + peg01);
-                } else if ((e.getX() > 490 && e.getX() < 510) && e.getY() > 460 && e.getY() < 560) {
-                    //++peg13;
-                    if (peg13 <= 4) {
-                        ++whomTurn;
-                    } else;
-                   try{ Loc3d good=new Loc3d(3,1,peg13);
-                    //Referee joey=new Referee();
-                    joey.placeBead(good);
-                   // ++whomTurn;
-                    joey.doThis();}catch(Exception c){}
-                    GameComponent hi = new GameComponent();
-                    mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
-                    System.out.println("peg00 is" + peg00);
-                    System.out.println("peg01 is" + peg01);
-                } else if ((e.getX() > 385 && e.getX() < 405) && e.getY() > 300 && e.getY() < 395) {
-                   // ++peg20;
-                    if (peg20 <= 4) {
-                        ++whomTurn;
-                    } else;
-                    Loc3d good=new Loc3d(0,2,peg20);
-                    //Referee joey=new Referee();
-                    try{joey.placeBead(good);
-                   // ++whomTurn;
-                    joey.doThis();}catch(Exception c){}
-                    GameComponent hi = new GameComponent();
-                    mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
-                    System.out.println("peg00 is" + peg00);
-                    System.out.println("peg01 is" + peg01);
-                } else if ((e.getX() > 455 && e.getX() < 475) && e.getY() > 345 && e.getY() < 460) {
-                  //  ++peg21;
-                    if (peg21 <= 4) {
-                        ++whomTurn;
-                    } else;
-                   try{ Loc3d good=new Loc3d(1,2,peg21);
-                    //Referee joey=new Referee();
-                    joey.placeBead(good);
-                   // ++whomTurn;
-                    joey.doThis();}catch(Exception c){}
-                    GameComponent hi = new GameComponent();
-                    mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
-                    System.out.println("peg00 is" + peg00);
-                    System.out.println("peg01 is" + peg01);
-                } else if ((e.getX() > 515 && e.getX() < 535) && e.getY() > 390 && e.getY() < 500) {
-                   // ++peg22;
-                    if (peg22 <= 4) {
-                        ++whomTurn;
-                    } else;
-                   try{ Loc3d good=new Loc3d(2,2,peg22);
-                    //Referee joey=new Referee();
-                    joey.placeBead(good);
-                   // ++whomTurn;
-                    joey.doThis();}catch(Exception c){}
-                    GameComponent hi = new GameComponent();
-                    mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
-                    System.out.println("peg00 is" + peg00);
-                    System.out.println("peg01 is" + peg01);
-                } else if ((e.getX() > 575 && e.getX() < 595) && e.getY() > 430 && e.getY() < 530) {
-                   // ++peg23;
-                    if (peg23 <= 4) {
-                        ++whomTurn;
-                    } else;
-                   try{ Loc3d good=new Loc3d(3,2,peg23);
-                    //Referee joey=new Referee();
-                    joey.placeBead(good);
-                   // ++whomTurn;
-                    joey.doThis();}catch(Exception c){}
-                    GameComponent hi = new GameComponent();
-                    mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
-                    System.out.println("peg00 is" + peg00);
-                    System.out.println("peg01 is" + peg01);
-                } else if ((e.getX() > 495 && e.getX() < 515) && e.getY() > 280 && e.getY() < 380) {
-                    //++peg30;
-                    if (peg30 <= 4) {
-                        ++whomTurn;
-                    } else;
-                    try{Loc3d good=new Loc3d(0,3,peg30);
-                    //Referee joey=new Referee();
-                    joey.placeBead(good);
-                   // ++whomTurn;
-                    joey.doThis();}catch(Exception c){}
-                    GameComponent hi = new GameComponent();
-                    mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
-                    System.out.println("peg00 is" + peg00);
-                    System.out.println("peg01 is" + peg01);
-                } else if ((e.getX() > 555 && e.getX() < 575) && e.getY() > 320 && e.getY() < 420) {
-                   // ++peg31;
-                    if (peg31 <= 4) {
-                        ++whomTurn;
-                    } else;
-                    try{ Loc3d good=new Loc3d(1,3,peg31);
-                    //Referee joey=new Referee();
-                    joey.placeBead(good);
-                   // ++whomTurn;
-                    joey.doThis();}catch(Exception c){}
-                    GameComponent hi = new GameComponent();
-                    mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
-                    System.out.println("peg00 is" + peg00);
-                    System.out.println("peg01 is" + peg01);
-                } else if ((e.getX() > 615 && e.getX() < 635) && e.getY() > 360 && e.getY() < 460) {
-                    //++peg32;
-                    if (peg32 <= 4) {
-                        ++whomTurn;
-                    } else;
-                     try{Loc3d good=new Loc3d(2,3,peg32);
-                    //Referee joey=new Referee();
-                    joey.placeBead(good);
-                   // ++whomTurn;
-                    joey.doThis();}catch(Exception c){}
-                    GameComponent hi = new GameComponent();
-                    mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
-                    System.out.println("peg00 is" + peg00);
-                    System.out.println("peg01 is" + peg01);
-                } else if ((e.getX() > 675 && e.getX() < 695) && e.getY() > 400 && e.getY() < 500) {
-                    //++peg33;
-                    if (peg33 <= 4) {
-                        ++whomTurn;
-                    } else;
-                     try{Loc3d good=new Loc3d(3,3,peg33);
-                    //Referee joey=new Referee();
-                    joey.placeBead(good);
-                   // ++whomTurn;
-                    joey.doThis();}catch(Exception c){}
-                    GameComponent hi = new GameComponent();
-                    mainFrame.setSize(1001, 900);
-                    mainFrame.setSize(1000, 900);
-                    System.out.println("peg00 is" + peg00);
-                    System.out.println("peg01 is" + peg01);
                 }
 
             }
@@ -637,47 +755,46 @@ public class NotGraphics extends JPanel {
         bottomLabel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
 
-                System.out.println("Clicked");
+              
             }
         });
         quitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 ++peg01;
-                GameComponent hi = new GameComponent();
+                 
 
             }
         });
         butoon.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 ++peg00;
-                GameComponent hi = new GameComponent();
+                 
                 //GoodbyeComponent bye = new GoodbyeComponent();
-                System.out.println("workds");
-                System.out.println(peg00);
-                bottomLabel.setText("hi");
+             
+                //   bottomLabel.setText("hi");
                 if (peg00 == 2) {
-                    bottomLabel.setText("bye");
+                    //     bottomLabel.setText("bye");
                 } else;
 
             }
         });
 
         mainPanel.add(scoreGame);
-        pindle.add(scoreGame);
+        // pindle.add(scoreGame);
         // smash.add(jooble);
         mainPanel.setLayout(new BorderLayout());
         auxillaryPanel.setLayout(new FlowLayout());
         auxillaryPanel.setSize(100, 100);
-        System.out.println("at the bottom");
-        trick.add(quitButton);
-        auxillaryPanel.add(trick, BorderLayout.SOUTH);
-        auxillaryPanel.add(what);
+      
+        quitPanel.add(quitButton);
+        auxillaryPanel.add(quitPanel, BorderLayout.SOUTH);
+        auxillaryPanel.add(buttonPanel);
         mainPanel.add(auxillaryPanel, BorderLayout.NORTH);
         //mainPanel.add(pindle, BorderLayout.SOUTH);
         mainPanel.add(bottomLabel, BorderLayout.SOUTH);
         mainPanel.setBackground(myColor);
         butoon.setBounds(20, 20, 20, 20);
-        ca.unbc.cpsc.score4.interfaces.NotGraphics.mainFrame.setSize(1001,900);
+        NotGraphics.mainFrame.setSize(1001, 900);
         butoon.setPreferredSize(new Dimension(200, 25));
         mainPanel.setSize(100, 100);
         mainFrame.getContentPane().setBackground(Color.black);
@@ -696,7 +813,7 @@ public class NotGraphics extends JPanel {
 
         mainPanel.add(scoreGame);
 
-        System.out.println("hmm");
+    
     }
 
 }
